@@ -1,9 +1,12 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Zettelkasten.Domain.Models;
+using Zettelkasten.Domain.Models.Painting;
 
 namespace Zettelkasten.DesktopApp.ViewModels
 {
@@ -57,6 +60,8 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
         private RelayCommand refreshZettelkastenCommand;
         public ICommand RefreshZettelkastenCommand => refreshZettelkastenCommand ??= new RelayCommand(RefreshZettelkasten);
+
+
         private void RefreshZettelkasten(object commandParameter)
         {
             var tagCount = GetTagsCount();
@@ -67,7 +72,16 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
             var msg = $"Список секторов: {checkAngles} градусов = {Environment.NewLine}{Environment.NewLine}{string.Join($";{Environment.NewLine}", sectorAngles.Select(x => $"{x.Key}: {x.Value.ToString()} Градусов"))}";
             MessageBox.Show(msg);
+
+
+            Random random = new Random();
+            var tagColors = tagCount.Select(x => (x.Key, Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255)))).ToDictionary(x => x.Key, x => x.Item2);
+            
+            // todo раскидать точки и потом рандомно двигать по одной
+            
         }
+
+
 
         private Dictionary<string, List<int>> GetTagsCount()
         {

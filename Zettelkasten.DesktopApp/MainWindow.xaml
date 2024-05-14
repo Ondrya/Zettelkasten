@@ -78,7 +78,15 @@
             <StackPanel Name="TabZettelkasten" Visibility="{Binding IsVisibleTabZettelkasten, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="Zettelkasten"/>
                 <Button Content="Обновить" Command="{Binding RefreshZettelkastenCommand}"/>
-                <Canvas Background="LightBlue" Width="800" Height="800"/>
+                <Viewbox Stretch="Uniform" Margin="10">
+                    <ItemsControl ItemsSource="{Binding Figures}" Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas Background="LightBlue" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Viewbox>
 
             </StackPanel>
 
