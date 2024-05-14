@@ -8,9 +8,10 @@ namespace Zettelkasten.DesktopApp.ViewModels
     {
         private readonly INoteService _noteService;
 
-        
+
         public ApplicationViewModel()
         {
+            ZettelNoteNew = new ZettelNoteNew();
             _noteService = new NoteService();
         }
 
