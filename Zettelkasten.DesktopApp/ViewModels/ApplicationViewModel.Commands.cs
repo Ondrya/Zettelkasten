@@ -13,32 +13,27 @@ namespace Zettelkasten.DesktopApp.ViewModels
         public ICommand CreateZetteleNote => createZetteleNote ??= new RelayCommand(PerformCreateZettelNote, (obj) => ZettelNoteNew != null && ZettelNoteNew.IsValid());
         private void PerformCreateZettelNote(object obj)
         {
-            get
+            var msg = JsonConvert.SerializeObject(ZettelNoteNew, Formatting.Indented);
+            var answer = MessageBox.Show(msg, "Добавить новую запись?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (answer == MessageBoxResult.No)
             {
-                return сreateZettelNote ??
-                    (сreateZettelNote = new RelayCommand(obj =>
-                    {
-                        var msg = JsonConvert.SerializeObject(ZettelNoteNew, Formatting.Indented);
-                        var answer = MessageBox.Show(msg, "Добавить новую запись?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                ZettelNoteNew.Clear();
+                return;
+            }
 
-                        if (answer == MessageBoxResult.No)
-                        {
-                            ZettelNoteNew.Clear();
-                            return;
-                        }
-                            
-                        var note = new Note();
-                        note.Name = ZettelNoteNew.Name;
-                        note.CreatedAt = ZettelNoteNew.CreatedAt;
-                        if (!string.IsNullOrWhiteSpace(ZettelNoteNew.Tag))
-                            note.Tags = ZettelNoteNew.Tag.Split(",").Select(x => x.Trim()).ToList();
-                        note.Content = ZettelNoteNew.Content;
+            var note = new Note();
+            note.Name = ZettelNoteNew.Name;
+            note.CreatedAt = ZettelNoteNew.CreatedAt;
+            if (!string.IsNullOrWhiteSpace(ZettelNoteNew.Tag))
+                note.Tags = ZettelNoteNew.Tag.Split(",").Select(x => x.Trim()).ToList();
+            note.Content = ZettelNoteNew.Content;
 
-                        var noteId = _noteService.Create(note);
+            var noteId = _noteService.Create(note);
 
-                        MessageBox.Show($"Создана новая запись #{noteId}", "Сохранено");
+            MessageBox.Show($"Создана новая запись #{noteId}", "Сохранено");
 
-                        ZettelNoteNew.Clear();
+            ZettelNoteNew.Clear();
         }
 
 
