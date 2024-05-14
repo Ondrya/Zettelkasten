@@ -59,10 +59,17 @@ namespace Zettelkasten.DesktopApp.ViewModels
         public ICommand RefreshZettelkastenCommand => refreshZettelkastenCommand ??= new RelayCommand(RefreshZettelkasten);
         private void RefreshZettelkasten(object commandParameter)
         {
-            GetTagsCount();
+            var tagCount = GetTagsCount();
+            var sectorCount = tagCount.Select(x => x.Value.Count).Sum();
+            var sectorAngle = 360 / (double)sectorCount;
+            var sectorAngles = tagCount.Select(x => (x.Key, x.Value.Count * sectorAngle)).ToDictionary(x => x.Key, x => x.Item2);
+            var checkAngles = sectorAngles.Select(x => x.Value).Sum();
+
+            var msg = $"Список секторов: {checkAngles} градусов = {Environment.NewLine}{Environment.NewLine}{string.Join($";{Environment.NewLine}", sectorAngles.Select(x => $"{x.Key}: {x.Value.ToString()} Градусов"))}";
+            MessageBox.Show(msg);
         }
 
-        private void GetTagsCount()
+        private Dictionary<string, List<int>> GetTagsCount()
         {
             var noteTags = GetNotes().Select(x => new { x.Id, x.Tags }).ToList();
             var tags = new Dictionary<string, List<int>>();
@@ -93,8 +100,10 @@ namespace Zettelkasten.DesktopApp.ViewModels
             }
         }
 
-            var msgInfo = $"В хранилище {noteTags.Count} записей. Список тегов: {Environment.NewLine}{Environment.NewLine}{string.Join($";{Environment.NewLine}", tags.Select(x => $"{x.Key}: {x.Value.Count.ToString()} шт"))}";
-            MessageBox.Show(msgInfo);
+            var msg = $"В хранилище {noteTags.Count} записей. Список тегов: {Environment.NewLine}{Environment.NewLine}{string.Join($";{Environment.NewLine}", tags.Select(x => $"{x.Key}: {x.Value.Count.ToString()} шт"))}";
+            MessageBox.Show(msg);
+
+            return tags;
         }
     }
 }
