@@ -36,22 +36,22 @@ namespace Zettelkasten.Domain.Models.Painting
         // Cartesian coordinates
         public PolarPoint A
         {
-            get { return new PolarPoint(RadiusMin, AngleDegMin); }
+            get { return new PolarPoint(RadiusMin, AngleDegMin, EntityId, Tooltip); }
         }
 
         public PolarPoint B
         {
-            get { return new PolarPoint(RadiusMax, AngleDegMin); }
+            get { return new PolarPoint(RadiusMax, AngleDegMin, EntityId, Tooltip); }
         }
 
         public PolarPoint C
         {
-            get { return new PolarPoint(RadiusMax, AngleDegMax); }
+            get { return new PolarPoint(RadiusMax, AngleDegMax, EntityId, Tooltip); }
         }
 
         public PolarPoint D
         {
-            get { return new PolarPoint(RadiusMin, AngleDegMax); }
+            get { return new PolarPoint(RadiusMin, AngleDegMax, EntityId, Tooltip); }
         }
 
 
