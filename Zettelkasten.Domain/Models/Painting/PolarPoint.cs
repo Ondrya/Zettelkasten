@@ -2,9 +2,9 @@
 
 namespace Zettelkasten.Domain.Models.Painting
 {
-    public class PolarPoint
+    public class PolarPoint : PolarBase
     {
-        public PolarPoint(double radius, double angleDeg)
+        public PolarPoint(double radius, double angleDeg, int entityId, string tooltip) : base(entityId, tooltip)
         {
             if (radius < 0.0)
                 throw new ArgumentException("Radius must be non-negative");
@@ -44,9 +44,20 @@ namespace Zettelkasten.Domain.Models.Painting
     {
         public Color Color { get; set; }
 
-        public PolarPointColored(double radius, double angleDeg, Color color) : base(radius, angleDeg)
+        public PolarPointColored(double radius, double angleDeg, Color color, int entityId, string tooltip) : base(radius, angleDeg, entityId, tooltip)
         {
             Color = color;
+        }
+    }
+
+
+    public class PolarPointPolyColored : PolarPoint
+    {
+        public List<Color> Colors { get; set; }
+
+        public PolarPointPolyColored(double radius, double angleDeg, List<Color> colors, int entityId, string tooltip) : base(radius, angleDeg, entityId, tooltip)
+        {
+            Colors = colors;
         }
     }
 }

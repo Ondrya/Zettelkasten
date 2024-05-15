@@ -76,19 +76,73 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
             Random random = new Random();
             var tagColors = tagCount.Select(x => (x.Key, Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255)))).ToDictionary(x => x.Key, x => x.Item2);
-            
+
             // todo раскидать точки и потом рандомно двигать по одной
-            
+
+            // создаём точки
+
+            var notes = GetNotes().ToList();
+            var noteCount = notes.Count;
+            var noteAngle = 360 / (double)noteCount;
+            var radius = 200;
+            double angle = 0.0;
+            var points = new List<PolarPointPolyColored>();
+
+            foreach (var note in notes)
+            {
+                var noteTags = note.Tags;
+                if (noteTags.Count == 0)
+                    note.Tags = new List<string>() { noTagPlaceholder };
+                var colors = tagColors.Where(kvp => note.Tags.Contains(kvp.Key)).Select(x => x.Value).ToList();
+                var point = new PolarPointPolyColored(radius, angle, colors, note.Id, note.Name);
+                points.Add(point);
+
+                // prepare next step
+                angle = angle + noteAngle;
+            }
+
+            double probe = CheckCollection(points);
         }
 
+
+        /// <summary>
+        /// Проба дляя генетического алгоритма
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        private double CheckCollection(List<PolarPointPolyColored> points)
+        {
+            var colors = points.Select(x => x.Colors).SelectMany(x => x).Distinct().ToList(); // список всех цветов
+            var tagSectorDiffs = new List<(double, double)>();
+            foreach (var color in colors)
+            {
+                var filteredPoints = points.Where(x => x.Colors.Contains(color)).OrderBy(x => x.AngleDeg).ToList();
+                var min = filteredPoints.Min(x => x.AngleDeg);
+                var max = filteredPoints.Max(x => x.AngleDeg);
+                tagSectorDiffs.Add((min, max));
+            }
+
+            return tagSectorDiffs.Select(x => x.Item2 - x.Item1).Sum();
+        }
+
+
+        private void MutateCollection(List<PolarPointPolyColored> points)
+        {
+            // todo сделать 4 вариации, поменяв местами 2 точки
+            // todo повторить 10 раз
+            // todo убить всех потомков кроме 4 с лучшей апроксимацией, сохранив первоначального родителя
+        }
+
+
+        private string noTagPlaceholder = "без тэга";
 
 
         private Dictionary<string, List<int>> GetTagsCount()
         {
             var noteTags = GetNotes().Select(x => new { x.Id, x.Tags }).ToList();
             var tags = new Dictionary<string, List<int>>();
-            var noTagPlaceholder = "без тэга";
-
+            
             tags.Add(noTagPlaceholder, new List<int>());
 
             foreach (var noteTag in noteTags)
