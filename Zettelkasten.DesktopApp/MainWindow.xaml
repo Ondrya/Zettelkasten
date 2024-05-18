@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zettelkasten.DesktopApp" 
+        xmlns:domain="clr-namespace:Zettelkasten.Domain.Models.Painting;assembly=Zettelkasten.Domain" 
         xmlns:vm="clr-namespace:Zettelkasten.DesktopApp.ViewModels"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
         mc:Ignorable="d"
         Title="Ежедневник" Height="900" Width="1200"
         d:DataContext="{d:DesignInstance Type=vm:ApplicationViewModel}">
@@ -31,7 +33,8 @@
         </StackPanel>
         <StackPanel Grid.Column="1">
 
-            <StackPanel Name="TabZettelkastenNew" Visibility="{Binding IsVisibleTabZettelkastenNew, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Name="TabZettelkastenNew" 
+                        Visibility="{Binding IsVisibleTabZettelkastenNew, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="Добавление новой карточки"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -65,36 +68,59 @@
                 </Grid>
             </StackPanel>
 
-            <StackPanel Name="TabSearch" Visibility="{Binding IsVisibleTabSearch, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Name="TabSearch" 
+                        Visibility="{Binding IsVisibleTabSearch, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="Поиск"/>
                 <Button Content="Обновить" Command="{Binding RefreshZettelListCommand}"/>
                 <DataGrid ItemsSource="{Binding ZettelList}" />
             </StackPanel>
 
-            <StackPanel Name="TabPlanning" Visibility="{Binding IsVisibleTabPlanning, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Name="TabPlanning" 
+                        Visibility="{Binding IsVisibleTabPlanning, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="Планирование"/>
             </StackPanel>
 
-            <StackPanel Name="TabZettelkasten" Visibility="{Binding IsVisibleTabZettelkasten, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Name="TabZettelkasten" 
+                        Visibility="{Binding IsVisibleTabZettelkasten, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="Zettelkasten"/>
-                <Button Content="Обновить" Command="{Binding RefreshZettelkastenCommand}"/>
-                <Viewbox Stretch="Uniform" Margin="10">
-                    <ItemsControl ItemsSource="{Binding Figures}" Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Обновить" Command="{Binding RefreshZettelkastenCommand}"/>
+                    <Button Grid.Column="1" Content="Следующий" Command="{Binding NextFromSelectionZettelListCommand}"/>
+                </Grid>
+                
+                <Viewbox Stretch="None"  Margin="10">
+                    <ItemsControl 
+                        ItemsSource="{Binding Figures}" 
+                        Width="{Binding CanvasWidth}" 
+                        Height="{Binding CanvasHeight}">
+
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <Canvas Background="LightBlue" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
+                        <ItemsControl.Resources>
+                            <Style TargetType="ContentPresenter">
+                                <Setter Property="Canvas.Left" Value="{Binding X}" />
+                                <Setter Property="Canvas.Top"  Value="{Binding Y}" />
+                            </Style>
+                        </ItemsControl.Resources>
                     </ItemsControl>
                 </Viewbox>
 
             </StackPanel>
 
-            <StackPanel Name="TabSelectionMap" Visibility="{Binding IsVisibleTabSelectionMap, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Name="TabSelectionMap" 
+                        Visibility="{Binding IsVisibleTabSelectionMap, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="Карта выбора"/>
             </StackPanel>
 
-            <StackPanel Name="TabNotepad" Visibility="{Binding IsVisibleTabNotepad, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Name="TabNotepad" 
+                        Visibility="{Binding IsVisibleTabNotepad, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="Блокнот"/>
             </StackPanel>
 

@@ -52,24 +52,29 @@ namespace Zettelkasten.Applications.Services
 
         public List<PolarPointPolyColored> CreatePopulationFirst(Dictionary<string, List<int>> tagCount, List<Note> notes)
         {
-            var tagColors = tagCount.Select(x => (x.Key, Color.FromArgb(_random.Next(0, 255), _random.Next(0, 255), _random.Next(0, 255)))).ToDictionary(x => x.Key, x => x.Item2);
+            var tagColors = tagCount
+                .Select(x => (x.Key, Color.FromArgb(
+                    _random.Next(0, 255), 
+                    _random.Next(0, 255), 
+                    _random.Next(0, 255))))
+                .ToDictionary(x => x.Key, x => x.Item2);
 
             // создаём точки
 
             var noteCount = notes.Count;
             var noteAngle = 360 / (double)noteCount;
-            var radius = 200;
+            var radius = 150;
             double angle = 0.0;
             var points = new List<PolarPointPolyColored>();
 
             foreach (var note in notes)
             {
-
                 var noteTags = note.Tags;
                 if (noteTags.Count == 0)
                     note.Tags = new List<string>() { ConstantService.NoTagPlaceholder };
                 var colors = tagColors.Where(kvp => note.Tags.Contains(kvp.Key)).Select(x => x.Value).ToList();
-                var point = new PolarPointPolyColored(radius, angle, colors, note.Id, note.Name);
+                var point = new PolarPointPolyColored(
+                    radius, angle, colors, note.Id, $"{note.TagsLookUp()}{Environment.NewLine}{note.Name}");
                 points.Add(point);
 
                 // prepare next step
@@ -143,7 +148,7 @@ namespace Zettelkasten.Applications.Services
 
         private List<List<PolarPointPolyColored>> FilterPopulation(int childCount, List<List<PolarPointPolyColored>> population)
         {
-            population = population.OrderBy(x => CheckCollection(x)).Take(childCount).ToList();
+            population = population.OrderByDescending(x => CheckCollection(x)).Take(childCount).ToList();
             return population;
         }
     }

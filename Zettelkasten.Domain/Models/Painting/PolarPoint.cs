@@ -1,4 +1,7 @@
-﻿using System.Drawing;
+﻿//using System.Drawing;
+
+
+using System.Drawing;
 
 namespace Zettelkasten.Domain.Models.Painting
 {
@@ -54,6 +57,12 @@ namespace Zettelkasten.Domain.Models.Painting
     public class PolarPointPolyColored : PolarPoint
     {
         public List<Color> Colors { get; set; }
+
+        public Color FirstColors { get
+            {
+                return Colors.First();
+            } 
+        }
 
         public PolarPointPolyColored(double radius, double angleDeg, List<Color> colors, int entityId, string tooltip) : base(radius, angleDeg, entityId, tooltip)
         {

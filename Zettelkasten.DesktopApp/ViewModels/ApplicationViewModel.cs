@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Shapes;
 using Zettelkasten.Applications.Services;
+using Zettelkasten.DesktopApp.Services;
 using Zettelkasten.Domain.Models;
+using Zettelkasten.Domain.Models.Painting;
 
 namespace Zettelkasten.DesktopApp.ViewModels
 {
@@ -11,20 +13,30 @@ namespace Zettelkasten.DesktopApp.ViewModels
         private readonly INoteService _noteService;
         private readonly GeneticService _geneticService;
         private readonly TagService _tagService;
+        private readonly DrawingService _drawingService;
 
         public ApplicationViewModel()
         {
             _noteService = new NoteService();
             _geneticService = new GeneticService(); 
             _tagService = new TagService();
+            CanvasWidth = 600;
+            CanvasHeight = 600;
+            _drawingService = new DrawingService(10, 20, CanvasWidth / 2, CanvasHeight / 2);
         }
 
 
         public ZettelNoteNew ZettelNoteNew { get; set; } = new ZettelNoteNew();
+        
         public ObservableCollection<NoteListLookUp> ZettelList { get; set; } = new ObservableCollection<NoteListLookUp>();
-        public ObservableCollection<Shape> Figures { get; set; } = new ObservableCollection<Shape>();
-        public int CanvasWidth { get; set; } = 800;
-        public int CanvasHeight { get; set; } = 800;
+
+        public ObservableCollection<Polygon> Figures { get; set; } = 
+            new ObservableCollection<Polygon>();
+
+        public List<List<PolarPointPolyColored>> Selection { get; set; } = new List<List<PolarPointPolyColored>>();
+
+        public int CanvasWidth { get; set; }
+        public int CanvasHeight { get; set; }
 
 
 

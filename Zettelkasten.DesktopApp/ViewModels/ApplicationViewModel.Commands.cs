@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using Zettelkasten.Applications.Services;
 using Zettelkasten.Domain.Models;
 using Zettelkasten.Domain.Models.Painting;
@@ -94,19 +96,32 @@ namespace Zettelkasten.DesktopApp.ViewModels
             double probeStart = _geneticService.CheckCollection(points);
 
             var childCount = 4;
-            var generationCount = 100;
+            var generationCount = 50;
+            var filterAfter = 4;
 
-            var selection = _geneticService.Selection(points, childCount, generationCount, 4);
+            Selection = _geneticService.Selection(points, childCount, generationCount, filterAfter);
 
-            DrawCollection(selection);
+            var first = Selection[0];
+
+            var _figures = _drawingService.CreatePolygones(first);
+
+            Figures = new ObservableCollection<Polygon>(_figures);
         }
 
 
-        private void DrawCollection(object selection)
+
+        private RelayCommand nextFromSelectionZettelListCommand;
+        public ICommand NextFromSelectionZettelListCommand => nextFromSelectionZettelListCommand ??= new RelayCommand(NextFromSelectionZettelList, (obj) => Selection != null && Selection.Count > 1);
+
+        private void NextFromSelectionZettelList(object commandParameter)
         {
-            //throw new NotImplementedException();
-            MessageBox.Show("Отрисовка");
+            var index = rnd.Next(Selection.Count);
+
+            var _figures = _drawingService.CreatePolygones(Selection[index]);
+
+            Figures = new ObservableCollection<Polygon>(_figures);
         }
 
+        private Random rnd = new Random();
     }
 }

@@ -34,6 +34,10 @@ namespace Zettelkasten.Domain.Models
 
         public List<AttachmentNote> Attachments { get; set; }
 
+        public string TagsLookUp()
+        {
+            return string.Join("; ", Tags);
+        }
 
         public NoteListLookUp ToListLookUp()
         {
