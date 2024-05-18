@@ -12,7 +12,7 @@ namespace Zettelkasten.Applications.Services
 {
     public class GeneticService
     {
-        public void MutateCollection(List<PolarPointPolyColored> points)
+        public List<List<PolarPointPolyColored>> MutateCollection(List<PolarPointPolyColored> points, int count)
         {
             // todo сделать 4 вариации, поменяв местами 2 точки
             // todo повторить 10 раз
@@ -83,9 +83,23 @@ namespace Zettelkasten.Applications.Services
         /// <exception cref="NotImplementedException"></exception>
         public List<List<PolarPointPolyColored>> Selection(List<PolarPointPolyColored> points, int childCount, int generationCount)
         {
-            //throw new NotImplementedException();
-            // todo implement
-            return new List<List<PolarPointPolyColored>>();
+            var population = new List<List<PolarPointPolyColored>>() { points };
+            do
+            {
+                var nextPopulation = new List<List<PolarPointPolyColored>>();
+                foreach (var item in population)
+                {
+                    var childrens = MutateCollection(points, childCount);
+                    nextPopulation.AddRange(childrens);
+                }
+                
+                population = nextPopulation;
+
+                generationCount -= 1;
+            }
+            while (generationCount > 0);
+            
+            return population;
         }
     }
 }
