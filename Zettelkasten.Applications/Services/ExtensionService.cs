@@ -1,25 +1,24 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Zettelkasten.Applications.Services
 {
-    /// <summary>
-    /// Копирование сложных типов без ссылок
-    /// </summary>
+    
     public static class ExtensionService
     {
+        /// <summary>
+        /// Копирование сложных типов без ссылок
+        /// </summary>
         public static T DeepCopy<T>(T item)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            MemoryStream stream = new MemoryStream();
-            formatter.Serialize(stream, item);
-            stream.Seek(0, SeekOrigin.Begin);
-            T result = (T)formatter.Deserialize(stream);
-            stream.Close();
-            return result;
+            var json = JsonConvert.SerializeObject(item);
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
-
+        /// <summary>
+        /// Копирование коллекции сложных типов без ссылок
+        /// </summary>
         public static IList<T> DeepCopyList<T>(this IList<T> list)
         {
             var json = JsonConvert.SerializeObject(list);
