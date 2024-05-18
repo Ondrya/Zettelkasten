@@ -9,24 +9,37 @@ namespace Zettelkasten.Applications.Services
 {
     public class TagService
     {
-        public int Create(Tag tag)
+        public Dictionary<string, List<int>> GetTagsCount(IEnumerable<Note> notes)
         {
-            throw new NotImplementedException();
-        }
+            var noteTags = notes.Select(x => new { x.Id, x.Tags }).ToList();
+            var tags = new Dictionary<string, List<int>>();
 
-        public Tag Get(int id) 
-        { 
-            throw new NotImplementedException();
-        }
+            tags.Add(ConstantService.NoTagPlaceholder, new List<int>());
 
-        public void Update(Tag tag)
-        {
-            throw new NotImplementedException();
-        }
+            foreach (var noteTag in noteTags)
+            {
+                var keys = noteTag.Tags;
+                if (keys == null)
+                {
+                    tags[ConstantService.NoTagPlaceholder].Add(noteTag.Id);
+                }
+                else
+                {
+                    foreach (var item in keys)
+                    {
+                        if (tags.ContainsKey(item))
+                        {
+                            tags[item].Add(noteTag.Id);
+                        }
+                        else
+                        {
+                            tags.Add(item, new List<int>() { noteTag.Id });
+                        }
+                    }
+                }
+            }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
+            return tags;
         }
     }
 }

@@ -5,14 +5,18 @@ using Zettelkasten.Domain.Models;
 
 namespace Zettelkasten.DesktopApp.ViewModels
 {
-    public partial class ApplicationViewModel : ViewModelBase
+    public partial class 
+        ApplicationViewModel : ViewModelBase
     {
         private readonly INoteService _noteService;
-
+        private readonly GeneticService _geneticService;
+        private readonly TagService _tagService;
 
         public ApplicationViewModel()
         {
             _noteService = new NoteService();
+            _geneticService = new GeneticService(); 
+            _tagService = new TagService();
         }
 
 
