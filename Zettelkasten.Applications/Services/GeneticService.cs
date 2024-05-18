@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using Zettelkasten.Domain.Models;
 using Zettelkasten.Domain.Models.Painting;
 
@@ -12,18 +6,53 @@ namespace Zettelkasten.Applications.Services
 {
     public class GeneticService
     {
+        private readonly Random _random;
+
+        public GeneticService()
+        {
+            _random = new Random();
+        }
+
+
+        /// <summary>
+        /// Мутировать коллекцию - создать поколение потомков
+        /// </summary>
+        /// <param name="points">коллекция - родитель</param>
+        /// <param name="count">кол-во потомков</param>
+        /// <returns></returns>
         public List<List<PolarPointPolyColored>> MutateCollection(List<PolarPointPolyColored> points, int count)
         {
-            // todo сделать 4 вариации, поменяв местами 2 точки
-            // todo повторить 10 раз
-            // todo убить всех потомков кроме 4 с лучшей апроксимацией, сохранив первоначального родителя
+            var length = points.Count;
+            var childs = new List<List<PolarPointPolyColored>>();
+            for (int i = 0; i < count; i++)
+            {
+                // var newChild = ExtensionService.DeepCopy<List<PolarPointPolyColored>>(points);
+                var newChild = points.DeepCopyList().ToList();
+                if (count > 1)
+                {
+                    var indexA = _random.Next(length);
+                    int indexB;
+                    do
+                    {
+                        indexB = _random.Next(length);
+                    }
+                    while (indexA == indexB);
+                    newChild.Swap(indexA, indexB);
+                    childs.Add(newChild);
+                }
+                else
+                {
+                    childs.Add(newChild);
+                    break;
+                }
+            }
+            return childs;
         }
 
 
         public List<PolarPointPolyColored> CreatePopulationFirst(Dictionary<string, List<int>> tagCount, List<Note> notes)
         {
-            Random random = new Random();
-            var tagColors = tagCount.Select(x => (x.Key, Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255)))).ToDictionary(x => x.Key, x => x.Item2);
+            var tagColors = tagCount.Select(x => (x.Key, Color.FromArgb(_random.Next(0, 255), _random.Next(0, 255), _random.Next(0, 255)))).ToDictionary(x => x.Key, x => x.Item2);
 
             // создаём точки
 
@@ -79,11 +108,13 @@ namespace Zettelkasten.Applications.Services
         /// <param name="points">первичная популяция</param>
         /// <param name="childCount">кол-во потомков в каждом следующем поколении</param>
         /// <param name="generationCount">кол-во поколений</param>
+        /// <param name="selectOnGenerartion">произвести отбор на поколении кратном этому числу</param>
         /// <returns>коллекция популяций</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public List<List<PolarPointPolyColored>> Selection(List<PolarPointPolyColored> points, int childCount, int generationCount)
+        public List<List<PolarPointPolyColored>> Selection(List<PolarPointPolyColored> points, int childCount, int generationCount, int selectOnGenerartion)
         {
             var population = new List<List<PolarPointPolyColored>>() { points };
+            var step = 0;
             do
             {
                 var nextPopulation = new List<List<PolarPointPolyColored>>();
@@ -95,10 +126,24 @@ namespace Zettelkasten.Applications.Services
                 
                 population = nextPopulation;
 
-                generationCount -= 1;
+
+                if (step % selectOnGenerartion == 0)
+                {
+                    population = FilterPopulation(childCount, population);
+                }
+
+
+                step = step + 1;
             }
-            while (generationCount > 0);
+            while (step < generationCount);
             
+            return FilterPopulation(childCount, population);
+        }
+
+
+        private List<List<PolarPointPolyColored>> FilterPopulation(int childCount, List<List<PolarPointPolyColored>> population)
+        {
+            population = population.OrderBy(x => CheckCollection(x)).Take(childCount).ToList();
             return population;
         }
     }

@@ -96,7 +96,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
             var childCount = 4;
             var generationCount = 100;
 
-            var selection = _geneticService.Selection(points, childCount, generationCount);
+            var selection = _geneticService.Selection(points, childCount, generationCount, 4);
 
             DrawCollection(selection);
         }
