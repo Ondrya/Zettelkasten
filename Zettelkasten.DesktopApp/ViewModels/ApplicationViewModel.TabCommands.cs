@@ -48,10 +48,10 @@ namespace Zettelkasten.DesktopApp.ViewModels
         }
 
         public ICommand TabSearchCommand => tabSearchCommand ??= new RelayCommand(TabSearch, (obj) => true);
-        public ICommand TabPlanningCommand => tabPlanningCommand ??= new RelayCommand(TabPlanning, (obj) => true);
+        public ICommand TabPlanningCommand => tabPlanningCommand ??= new RelayCommand(TabPlanning, (obj) => false);
         public ICommand TabZettelkastenCommand => tabZettelkastenCommand ??= new RelayCommand(TabZettelkasten, (obj) => true);
-        public ICommand TabSelectionMapCommand => tabSelectionMapCommand ??= new RelayCommand(TabSelectionMap, (obj) => true);
-        public ICommand TabNotepadCommand => tabNotepadCommand ??= new RelayCommand(TabNotepad, (obj) => true);
+        public ICommand TabSelectionMapCommand => tabSelectionMapCommand ??= new RelayCommand(TabSelectionMap, (obj) => false);
+        public ICommand TabNotepadCommand => tabNotepadCommand ??= new RelayCommand(TabNotepad, (obj) => false);
         public ICommand TabZettelkastenNewCommand => tabZettelkastenNewCommand ??= new RelayCommand(TabZettelkastenNew, (obj) => true);
     }
 }

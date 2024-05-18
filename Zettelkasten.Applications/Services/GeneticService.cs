@@ -148,7 +148,7 @@ namespace Zettelkasten.Applications.Services
 
         private List<List<PolarPointPolyColored>> FilterPopulation(int childCount, List<List<PolarPointPolyColored>> population)
         {
-            population = population.OrderByDescending(x => CheckCollection(x)).Take(childCount).ToList();
+            population = population.OrderBy(x => CheckCollection(x)).Take(childCount).ToList();
             return population;
         }
     }
