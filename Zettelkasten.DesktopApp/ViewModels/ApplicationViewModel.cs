@@ -10,7 +10,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
     public partial class 
         ApplicationViewModel : ViewModelBase
     {
-        private readonly INoteService _noteService;
+        private readonly NoteService _noteService;
         private readonly GeneticService _geneticService;
         private readonly TagService _tagService;
         private readonly DrawingService _drawingService;

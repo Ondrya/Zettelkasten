@@ -10,7 +10,8 @@ namespace Zettelkasten.Applications.Services
 
         public GeneticService()
         {
-            _random = new Random();
+            var randomize = Guid.NewGuid().GetHashCode();
+            _random = new Random(randomize);
         }
 
 
