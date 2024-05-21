@@ -1,12 +1,16 @@
-﻿using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
-using System.Text.Json.Serialization;
+﻿using Zettelkasten.Applications.Interfaces;
 using Zettelkasten.Domain.Models;
 
 namespace Zettelkasten.Applications.Services
 {
+    /// <summary>
+    /// Сервис для работы с заметками
+    /// </summary>
     public class NoteService
     {
+        /// <summary>
+        /// Провайдер данных
+        /// </summary>
         private readonly IStorageService _storageService;
 
         public NoteService()

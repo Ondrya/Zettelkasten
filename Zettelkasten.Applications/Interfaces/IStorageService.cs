@@ -1,6 +1,6 @@
 ﻿using Zettelkasten.Domain.Models;
 
-namespace Zettelkasten.Applications.Services
+namespace Zettelkasten.Applications.Interfaces
 {
     /// <summary>
     /// Провайдер хранилища данных
@@ -21,9 +21,9 @@ namespace Zettelkasten.Applications.Services
         /// </summary>
         /// <returns></returns>
         List<Note> Get();
-        
+
         Note Get(int id);
-        
+
         void Update(Note note);
     }
 }

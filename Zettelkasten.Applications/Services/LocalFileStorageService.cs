@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zettelkasten.Applications.Interfaces;
 using Zettelkasten.Domain.Models;
 
 namespace Zettelkasten.Applications.Services

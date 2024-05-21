@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Shapes;
+using Zettelkasten.Applications.Interfaces;
 using Zettelkasten.Applications.Services;
 using Zettelkasten.DesktopApp.Services;
 using Zettelkasten.Domain.Models;
@@ -11,7 +12,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
         ApplicationViewModel : ViewModelBase
     {
         private readonly NoteService _noteService;
-        private readonly GeneticService _geneticService;
+        private readonly IGeneticService _geneticService;
         private readonly TagService _tagService;
         private readonly DrawingService _drawingService;
         private readonly bool _showDebugMessage;

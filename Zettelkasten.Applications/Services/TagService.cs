@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Zettelkasten.Applications.Interfaces;
 using Zettelkasten.Domain.Models;
 
 namespace Zettelkasten.Applications.Services
 {
-    public class TagService
+    /// <summary>
+    /// Сервис ля работы с метками
+    /// </summary>
+    public class TagService : ITagService
     {
         public Dictionary<string, List<int>> GetTagsCount(IEnumerable<Note> notes)
         {

@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Zettelkasten.Applications.Services
 {
-    
+    /// <summary>
+    /// Расширения для удобства работы
+    /// </summary>
     public static class ExtensionService
     {
         /// <summary>
