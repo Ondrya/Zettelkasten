@@ -75,40 +75,44 @@ namespace Zettelkasten.DesktopApp.ViewModels
             var notes = GetNotes();
             var tagCount = _tagService.GetTagsCount(notes);
 
-#if DEBUG
-            var msg = $"В хранилище {notes.Count()} записей. Список тегов: {Environment.NewLine}{Environment.NewLine}{string.Join($";{Environment.NewLine}", tagCount.Select(x => $"{x.Key}: {x.Value.Count.ToString()} шт"))}";
+            if (_showDebugMessage)
+            {
+                var msg = $"В хранилище {notes.Count()} записей. Список тегов: {Environment.NewLine}{Environment.NewLine}{string.Join($";{Environment.NewLine}", tagCount.Select(x => $"{x.Key}: {x.Value.Count.ToString()} шт"))}";
 
-            MessageBox.Show(msg);
-#endif
+                MessageBox.Show(msg);
+            }
+
 
             var sectorCount = tagCount.Select(x => x.Value.Count).Sum();
             var sectorAngle = 360 / (double)sectorCount;
             var sectorAngles = tagCount.Select(x => (x.Key, x.Value.Count * sectorAngle)).ToDictionary(x => x.Key, x => x.Item2);
             var checkAngles = sectorAngles.Select(x => x.Value).Sum();
 
-#if DEBUG
-            var msg2 = $"Список секторов: {checkAngles} градусов = {Environment.NewLine}{Environment.NewLine}{string.Join($";{Environment.NewLine}", sectorAngles.Select(x => $"{x.Key}: {x.Value.ToString()} Градусов"))}";
-            MessageBox.Show(msg2);
-#endif
+            if (_showDebugMessage)
+            {
+                var msg2 = $"Список секторов: {checkAngles} градусов = {Environment.NewLine}{Environment.NewLine}{string.Join($";{Environment.NewLine}", sectorAngles.Select(x => $"{x.Key}: {x.Value.ToString()} Градусов"))}";
+                MessageBox.Show(msg2);
+            }
 
             List<PolarPointPolyColored> points = _geneticService.CreatePopulationFirst(tagCount, notes.ToList());
-
-            double probeStart = _geneticService.CheckCollection(points);
+            //DrawNotes(points);
 
             var childCount = 4;
-            var generationCount = 50;
+            var generationCount = 25;
             var filterAfter = 4;
 
             Selection = _geneticService.Selection(points, childCount, generationCount, filterAfter);
-
             var first = Selection[0];
 
-            var _figures = _drawingService.CreatePolygones(first);
 
-            Figures = new ObservableCollection<Polygon>(_figures);
+            DrawNotes(first);
         }
 
-
+        private void DrawNotes(List<PolarPointPolyColored> noteCollection)
+        {
+            var _figures = _drawingService.CreatePolygones(noteCollection);
+            Figures = new ObservableCollection<Polygon>(_figures);
+        }
 
         private RelayCommand nextFromSelectionZettelListCommand;
         public ICommand NextFromSelectionZettelListCommand => nextFromSelectionZettelListCommand ??= new RelayCommand(NextFromSelectionZettelList, (obj) => Selection != null && Selection.Count > 1);

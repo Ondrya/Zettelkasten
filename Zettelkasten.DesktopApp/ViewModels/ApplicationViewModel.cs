@@ -14,9 +14,11 @@ namespace Zettelkasten.DesktopApp.ViewModels
         private readonly GeneticService _geneticService;
         private readonly TagService _tagService;
         private readonly DrawingService _drawingService;
+        private readonly bool _showDebugMessage;
 
         public ApplicationViewModel()
         {
+            _showDebugMessage = false;
             _noteService = new NoteService();
             _geneticService = new GeneticService(); 
             _tagService = new TagService();

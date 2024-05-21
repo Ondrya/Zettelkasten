@@ -128,7 +128,7 @@ namespace Zettelkasten.DesktopApp.Services
         }
 
 
-        public static System.Windows.Media.Color GetFillColor(System.Drawing.Color currentColor)
+        private static System.Windows.Media.Color GetFillColor(System.Drawing.Color currentColor)
         {
             return System.Windows.Media.Color.FromArgb(currentColor.A, currentColor.R, currentColor.G, currentColor.B);
         }

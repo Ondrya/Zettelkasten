@@ -27,7 +27,11 @@ namespace Zettelkasten.Applications.Services
             var childs = new List<List<PolarPointPolyColored>>();
             for (int i = 0; i < count; i++)
             {
-                // var newChild = ExtensionService.DeepCopy<List<PolarPointPolyColored>>(points);
+                foreach (var point in points)
+                {
+                    if (point.Colors == null)
+                        point.Colors = new List<Color>();
+                }
                 var newChild = points.DeepCopyList().ToList();
                 if (count > 1)
                 {
@@ -38,7 +42,11 @@ namespace Zettelkasten.Applications.Services
                         indexB = _random.Next(length);
                     }
                     while (indexA == indexB);
-                    newChild.Swap(indexA, indexB);
+
+                    //swap angles
+                    (newChild[indexA].AngleDeg , newChild[indexB].AngleDeg) =
+                        (newChild[indexB].AngleDeg, newChild[indexA].AngleDeg);
+
                     childs.Add(newChild);
                 }
                 else
@@ -94,11 +102,18 @@ namespace Zettelkasten.Applications.Services
         /// <exception cref="NotImplementedException"></exception>
         public double CheckCollection(List<PolarPointPolyColored> points)
         {
-            var colors = points.Select(x => x.Colors).SelectMany(x => x).Distinct().ToList(); // список всех цветов
+            var colors = points
+                .Select(x => x.Colors)
+                .SelectMany(x => x)
+                .Distinct()
+                .ToList(); // список всех цветов
             var tagSectorDiffs = new List<(double, double)>();
             foreach (var color in colors)
             {
-                var filteredPoints = points.Where(x => x.Colors.Contains(color)).OrderBy(x => x.AngleDeg).ToList();
+                var filteredPoints = points
+                    .Where(x => x.Colors.Contains(color))
+                    .OrderBy(x => x.AngleDeg)
+                    .ToList();
                 var min = filteredPoints.Min(x => x.AngleDeg);
                 var max = filteredPoints.Max(x => x.AngleDeg);
                 tagSectorDiffs.Add((min, max));
@@ -106,6 +121,41 @@ namespace Zettelkasten.Applications.Services
 
             return tagSectorDiffs.Select(x => x.Item2 - x.Item1).Sum();
         }
+
+
+        /// <summary>
+        /// Проба дляя генетического алгоритма
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public int CheckCollection2(List<PolarPointPolyColored> points)
+        {
+            var colors = points
+                .Select(x => x.Colors)
+                .SelectMany(x => x)
+                .Distinct()
+                .ToList(); // список всех цветов
+            var tagSectorDiffs = new List<(double, double)>();
+
+            var countPointInAnotherTagSector = 0;
+
+            foreach (var color in colors)
+            {
+                var minIndex = points.FindIndex(x => x.Colors.Contains(color));
+                var maxIndex = points.FindLastIndex(x => x.Colors.Contains(color));
+
+                for (var i = minIndex; i < maxIndex; i++)
+                {
+                    var pointColors = points[i].Colors;
+                    countPointInAnotherTagSector += pointColors.Where(x => x != color).Count();
+                }
+            }
+
+            return countPointInAnotherTagSector;
+        }
+
+
 
 
         /// <summary>
@@ -119,21 +169,23 @@ namespace Zettelkasten.Applications.Services
         /// <exception cref="NotImplementedException"></exception>
         public List<List<PolarPointPolyColored>> Selection(List<PolarPointPolyColored> points, int childCount, int generationCount, int selectOnGenerartion)
         {
-            var population = new List<List<PolarPointPolyColored>>() { points };
+            var population = new List<List<PolarPointPolyColored>>() { 
+                points.DeepCopyList().ToList() };
+
             var step = 0;
             do
             {
                 var nextPopulation = new List<List<PolarPointPolyColored>>();
                 foreach (var item in population)
                 {
-                    var childrens = MutateCollection(points, childCount);
+                    var childrens = MutateCollection(item, childCount);
                     nextPopulation.AddRange(childrens);
                 }
                 
                 population = nextPopulation;
 
 
-                if (step % selectOnGenerartion == 0)
+                if (step % selectOnGenerartion == 0 && step > 0)
                 {
                     population = FilterPopulation(childCount, population);
                 }
@@ -149,7 +201,10 @@ namespace Zettelkasten.Applications.Services
 
         private List<List<PolarPointPolyColored>> FilterPopulation(int childCount, List<List<PolarPointPolyColored>> population)
         {
+            
+
             population = population.OrderBy(x => CheckCollection(x)).Take(childCount).ToList();
+
             return population;
         }
     }
