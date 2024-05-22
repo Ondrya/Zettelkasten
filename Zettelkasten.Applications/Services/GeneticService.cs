@@ -79,7 +79,7 @@ namespace Zettelkasten.Applications.Services
                     note.Tags = new List<string>() { ConstantService.NoTagPlaceholder };
                 var colors = tagColors.Where(kvp => note.Tags.Contains(kvp.Key)).Select(x => x.Value).ToList();
                 var point = new PolarPointPolyColored(
-                    radius, angle, colors, note.Id, $"{note.TagsLookUp()}{Environment.NewLine}{note.Name}");
+                    radius, angle, colors, note.Id, $"{note.TagsLookUp()}---{note.Name}");
                 points.Add(point);
 
                 // prepare next step

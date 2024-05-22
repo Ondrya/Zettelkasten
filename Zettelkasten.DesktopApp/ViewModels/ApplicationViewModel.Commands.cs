@@ -106,17 +106,62 @@ namespace Zettelkasten.DesktopApp.ViewModels
             var first = Selection[0];
             _figures = _drawingService.CreatePolygones(first);
 
-            DrawNotes();
+            DrawNotes(_figures);
         }
 
-        public void DrawNotes()
+        public List<Shape> CreateLinks(List<Shape> polygons)
         {
-            Figures = new ObservableCollection<Polygon>(_figures);
+            var shapeLinks = new List<Shape>();
+
+            foreach (var item in polygons)
+            {
+                var tags = GetShapeTags(item);
+                var theSameTags = polygons
+                    .Where(x => 
+                        GetShapeTags(x).Intersect(tags).Any())
+                    .ToList();
+                foreach (var item1 in theSameTags)
+                {
+                    var itemLink = new Line();
+
+                    // Create a red Brush  
+                    SolidColorBrush redBrush = new SolidColorBrush();
+                    redBrush.Color = Colors.Red;
+
+                    // Set Line's width and color  
+                    itemLink.StrokeThickness = 1;
+                    itemLink.Stroke = redBrush;
+
+                    var centered = 10;
+                    itemLink.X1 = (item as Polygon).Points[0].X + centered;
+                    itemLink.Y1 = (item as Polygon).Points[0].Y + centered;
+                    itemLink.X2 = (item1 as Polygon).Points[0].X + centered;
+                    itemLink.Y2 = (item1 as Polygon).Points[0].Y + centered;
+
+                    shapeLinks.Add(itemLink);
+                }
+
+            }
+            return shapeLinks;
         }
 
-        public void DrawNotes(List<Polygon> polygons)
+        private static List<string> GetShapeTags(Shape item)
         {
-            Figures = new ObservableCollection<Polygon>(polygons);
+            return (item.ToolTip as string).Split("---")[0].Split(";").ToList();
+        }
+
+        public void DrawNotes(List<Shape> polygons)
+        {
+            var res = polygons;
+            var shapeLinks = CreateLinks(polygons);
+            res.AddRange(shapeLinks);
+
+            Figures = new ObservableCollection<Shape>(res);
+        }
+
+        public void ClearDrawNotes()
+        {
+            Figures = new ObservableCollection<Shape>();
         }
 
         private RelayCommand nextFromSelectionZettelListCommand;
@@ -128,7 +173,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
             var _figures = _drawingService.CreatePolygones(Selection[index]);
 
-            Figures = new ObservableCollection<Polygon>(_figures);
+            Figures = new ObservableCollection<Shape>(_figures);
         }
 
         private Random rnd = new Random();

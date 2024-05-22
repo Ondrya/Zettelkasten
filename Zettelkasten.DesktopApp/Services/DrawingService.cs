@@ -48,9 +48,9 @@ namespace Zettelkasten.DesktopApp.Services
             return res;
         }
 
-        public List<Polygon> CreatePolygones(List<PolarPointPolyColored> first)
+        public List<Shape> CreatePolygones(List<PolarPointPolyColored> first)
         {
-            var res = new List<Polygon>();
+            var res = new List<Shape>();
             foreach (var item in first)
             {
                 if (item.Colors.Count == 1)
@@ -75,6 +75,7 @@ namespace Zettelkasten.DesktopApp.Services
                     }
                 }
             }
+
             return res;
         }
 

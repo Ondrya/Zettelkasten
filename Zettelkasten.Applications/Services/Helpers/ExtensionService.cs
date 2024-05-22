@@ -67,6 +67,10 @@ namespace Zettelkasten.Applications.Services
         /// <returns></returns>
         public static bool ContainsAny(this string haystack, IEnumerable<string> needles)
         {
+            if (haystack == null)
+                return false;
+            if (!needles.Any())
+                return false;
             foreach (string needle in needles)
             {
                 if (haystack.Contains(needle))

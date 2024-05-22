@@ -16,39 +16,21 @@ namespace Zettelkasten.DesktopApp
             DataContext = new ApplicationViewModel();
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void PlanningButton_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ZettelkastenButton_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void SelectionMapButton_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void NotepadButton_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void TagCollection_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            ApplicationViewModel? vm = GetVM();
+            vm.ClearDrawNotes();
+
             var selectedItems = TagCollection.SelectedItems.Cast<string>();
             var selectedTagName = selectedItems;
-            var vm = (this.DataContext as ApplicationViewModel);
-
+            
             var filteredFigures = vm._figures.Where(x => ((string)x.ToolTip).ContainsAny(selectedTagName)).ToList();
             vm.DrawNotes(filteredFigures);
+        }
+
+        private ApplicationViewModel? GetVM()
+        {
+            return (this.DataContext as ApplicationViewModel);
         }
 
         private void SelectAllTags_Click(object sender, RoutedEventArgs e)

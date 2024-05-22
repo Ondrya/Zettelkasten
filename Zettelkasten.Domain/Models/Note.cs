@@ -36,7 +36,7 @@ namespace Zettelkasten.Domain.Models
 
         public string TagsLookUp()
         {
-            return string.Join("; ", Tags.Select(x => $"<<{x}>>"));
+            return string.Join(";", Tags.Select(x => $"{x}"));
         }
 
         public NoteListLookUp ToListLookUp()
