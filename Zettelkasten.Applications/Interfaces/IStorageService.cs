@@ -14,7 +14,11 @@ namespace Zettelkasten.Applications.Interfaces
         /// <returns></returns>
         int Create(Note note);
 
-        void Delete(Note note);
+        /// <summary>
+        /// Удаление щаписи
+        /// </summary>
+        /// <param name="id"></param>
+        void Delete(int id);
 
         /// <summary>
         /// Получить все записи

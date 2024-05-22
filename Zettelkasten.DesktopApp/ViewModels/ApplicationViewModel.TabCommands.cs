@@ -11,6 +11,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
         private RelayCommand tabSelectionMapCommand;
         private RelayCommand tabNotepadCommand;
         private RelayCommand tabZettelkastenNewCommand;
+        private RelayCommand tabZettelkastenEditCommand;
 
         private void ShowTab(MenuItems itemToShow)
         {
@@ -20,11 +21,13 @@ namespace Zettelkasten.DesktopApp.ViewModels
             IsVisibleTabSelectionMap = itemToShow == MenuItems.SelectionMap;
             IsVisibleTabZettelkasten = itemToShow == MenuItems.Zettelkasten;
             IsVisibleTabZettelkastenNew = itemToShow == MenuItems.ZettelkastenNew;
+            IsVisibleTabZettelkastenEdit = itemToShow == MenuItems.ZettelkastenEdit;
         }
 
         private void TabSearch(object obj)
         {
             ShowTab(MenuItems.Search);
+            RefreshZettelList(null);
         }
         private void TabPlanning(object obj)
         {
@@ -47,11 +50,17 @@ namespace Zettelkasten.DesktopApp.ViewModels
             ShowTab(MenuItems.ZettelkastenNew);
         }
 
+        private void TabZettelkastenEdit(object obj)
+        {
+            ShowTab(MenuItems.ZettelkastenEdit);
+        }
+
         public ICommand TabSearchCommand => tabSearchCommand ??= new RelayCommand(TabSearch, (obj) => true);
         public ICommand TabPlanningCommand => tabPlanningCommand ??= new RelayCommand(TabPlanning, (obj) => false);
         public ICommand TabZettelkastenCommand => tabZettelkastenCommand ??= new RelayCommand(TabZettelkasten, (obj) => true);
         public ICommand TabSelectionMapCommand => tabSelectionMapCommand ??= new RelayCommand(TabSelectionMap, (obj) => false);
         public ICommand TabNotepadCommand => tabNotepadCommand ??= new RelayCommand(TabNotepad, (obj) => false);
         public ICommand TabZettelkastenNewCommand => tabZettelkastenNewCommand ??= new RelayCommand(TabZettelkastenNew, (obj) => true);
+        public ICommand TabZettelkastenEditCommand => tabZettelkastenEditCommand ??= new RelayCommand(TabZettelkastenEdit, (obj) => true);
     }
 }

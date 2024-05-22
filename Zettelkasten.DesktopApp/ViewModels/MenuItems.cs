@@ -7,6 +7,7 @@
         Zettelkasten,
         SelectionMap,
         Notepad,
-        ZettelkastenNew
+        ZettelkastenNew,
+        ZettelkastenEdit
     }
 }

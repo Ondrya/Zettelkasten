@@ -32,17 +32,17 @@ namespace Zettelkasten.Applications.Services
 
         public Note Get(int id)
         {
-            throw new NotImplementedException();
+            return _storageService.Get(id);
         }
 
         public void Update(Note note)
         {
-            throw new NotImplementedException();
+            _storageService.Update(note);
         }
 
-        public void Delete(Note note)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            _storageService.Delete(id);
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using System.Windows.Shapes;
 using Zettelkasten.Applications.Interfaces;
 using Zettelkasten.Applications.Services;
 using Zettelkasten.DesktopApp.Services;
+using Zettelkasten.DesktopApp.ViewModels;
 using Zettelkasten.Domain.Models;
 using Zettelkasten.Domain.Models.Painting;
 
@@ -32,8 +34,11 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
 
         public ZettelNoteNew ZettelNoteNew { get; set; } = new ZettelNoteNew();
-        
+
+        public ZettelNoteEdit ZettelNoteEdit { get; set; }
+
         public ObservableCollection<NoteListLookUp> ZettelList { get; set; } = new ObservableCollection<NoteListLookUp>();
+        public NoteListLookUp SelectedNoteListLookUp { get; set; }
 
         public List<Shape> _figures = new List<Shape>();
         public ObservableCollection<Shape> Figures { get; set; } = 
@@ -56,6 +61,8 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
         public bool IsVisibleTabZettelkastenNew { get; set; }
 
+        public bool IsVisibleTabZettelkastenEdit { get; set; }
+
         public bool IsVisibleTabSearch { get; set; }
 
         public bool IsVisibleTabPlanning { get; set; }
@@ -65,5 +72,6 @@ namespace Zettelkasten.DesktopApp.ViewModels
         public bool IsVisibleTabSelectionMap { get; set; }
 
         public bool IsVisibleTabNotepad { get; set; }
+
     }
 }

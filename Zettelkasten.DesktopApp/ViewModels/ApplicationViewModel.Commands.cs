@@ -42,6 +42,60 @@ namespace Zettelkasten.DesktopApp.ViewModels
         }
 
 
+        private RelayCommand updateZetteleNote;
+        public ICommand UpdateZetteleNote => updateZetteleNote ??= new RelayCommand(PerformUpdateZettelNote, (obj) => ZettelNoteEdit != null && ZettelNoteEdit.IsValid());
+        private void PerformUpdateZettelNote(object obj)
+        {
+            var msg = JsonConvert.SerializeObject(ZettelNoteEdit, Formatting.Indented);
+            var answer = MessageBox.Show(msg, "Перезаписать запись?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (answer == MessageBoxResult.No)
+            {
+                ZettelNoteEdit.Clear();
+                return;
+            }
+
+            var note = new Note();
+            note.Id = ZettelNoteEdit.Id;
+            note.Name = ZettelNoteEdit.Name;
+            note.CreatedAt = ZettelNoteEdit.CreatedAt;
+            if (!string.IsNullOrWhiteSpace(ZettelNoteEdit.Tag))
+                note.Tags = ZettelNoteEdit.Tag.Split(",").Select(x => x.Trim()).ToList();
+            note.Content = ZettelNoteEdit.Content;
+
+            _noteService.Update(note);
+
+            MessageBox.Show($"Обновлена запись #{note.Id}", "Сохранено");
+
+            ZettelNoteEdit.Clear();
+            ShowTab(MenuItems.Search);
+        }
+
+
+        private RelayCommand deleteZetteleNote;
+        public ICommand DeleteZetteleNote => deleteZetteleNote ??= new RelayCommand(PerformDeleteZettelNote, (obj) => ZettelNoteEdit != null && ZettelNoteEdit.IsValid());
+        private void PerformDeleteZettelNote(object obj)
+        {
+            var msg = JsonConvert.SerializeObject(ZettelNoteEdit, Formatting.Indented);
+            var answer = MessageBox.Show(msg, "Удалить запись?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (answer == MessageBoxResult.No)
+            {
+                ZettelNoteEdit.Clear();
+                return;
+            }
+
+            _noteService.Delete(ZettelNoteEdit.Id);
+
+            MessageBox.Show($"Удалена запись #{ZettelNoteEdit.Id}", "Удалено");
+
+            ZettelNoteEdit.Clear();
+            ShowTab(MenuItems.Search);
+        }
+
+
+
+
         private RelayCommand refreshZettelListCommand;
         public ICommand RefreshZettelListCommand => refreshZettelListCommand ??= new RelayCommand(RefreshZettelList);
         private void RefreshZettelList(object commandParameter)
@@ -93,7 +147,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
             List<PolarPointPolyColored> points = _geneticService.CreatePopulationFirst(tagCount, notes.ToList());
 
-            Selection = _geneticService.Selection(points, ChildCount, GenerationCount, FilterAfter);
+                        Selection = _geneticService.Selection(points, ChildCount, GenerationCount, FilterAfter);
             var first = Selection[0];
             _figures = _drawingService.CreatePolygones(first);
 
@@ -170,5 +224,17 @@ namespace Zettelkasten.DesktopApp.ViewModels
         }
 
         private Random rnd = new Random();
+
+
+        private RelayCommand doubleClickCommand;
+        public ICommand DoubleClickCommand => doubleClickCommand ??= new RelayCommand(DoubleClick);
+
+        private void DoubleClick(object commandParameter)
+        {
+            //MessageBox.Show($"{SelectedNoteListLookUp.Id} --- {SelectedNoteListLookUp.Name}");
+            ZettelNoteEdit = new ZettelNoteEdit(_noteService.Get(SelectedNoteListLookUp.Id));
+            ShowTab(MenuItems.ZettelkastenEdit);
+        }
+
     }
 }

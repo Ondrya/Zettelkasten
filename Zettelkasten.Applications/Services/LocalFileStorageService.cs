@@ -77,17 +77,27 @@ namespace Zettelkasten.Applications.Services
 
         public Note Get(int id)
         {
-            throw new NotImplementedException();
+            var path = Path.Combine(GetCurrentStoragePath(), $"{id}.txt");
+            var fileContent = File.ReadAllText(path);
+            var note = JsonConvert.DeserializeObject<Note>(fileContent);
+            if (note.Tags == null)
+                note.Tags = new List<string>();
+            return note;
         }
 
         public void Update(Note note)
         {
-            throw new NotImplementedException();
+            var filename = $"{note.Id}.txt";
+            var path = Path.Combine(GetCurrentStoragePath(), filename);
+            File.WriteAllText(path, JsonConvert.SerializeObject(note));
         }
 
-        public void Delete(Note note)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var filename = $"{id}.txt";
+            var path = Path.Combine(GetCurrentStoragePath(), filename);
+            File.Delete(path);
+            storage.Remove(id.ToString());
         }
 
 

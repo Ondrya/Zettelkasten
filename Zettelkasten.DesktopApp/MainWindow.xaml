@@ -65,11 +65,64 @@
                 </Grid>
             </StackPanel>
 
+            <StackPanel Name="TabZettelkastenEdit" 
+            Visibility="{Binding IsVisibleTabZettelkastenEdit, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock Text="Редактирование"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="5">
+                        <StackPanel DataContext="{Binding ZettelNoteEdit}">
+                            <DockPanel>
+                                <Label Content="Id"/>
+                                <TextBox Text="{Binding Id}"/>
+                            </DockPanel>
+                            <DockPanel>
+                                <Label Content="Название идеи"/>
+                                <TextBox Text="{Binding Name}"/>
+                            </DockPanel>
+                            <DockPanel>
+                                <Label Content="Дата Создания"/>
+                                <TextBox Text="{Binding CreatedAt}"/>
+                            </DockPanel>
+                            <DockPanel>
+                                <Label Content="Тэги"/>
+                                <TextBox Text="{Binding Tag}"/>
+                            </DockPanel>
+                            <StackPanel>
+                                <Label>Содержимое</Label>
+                                <TextBox AcceptsReturn="True" MinLines="6" Text="{Binding Content}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Content="Сохранить" Command="{Binding UpdateZetteleNote}"/>
+                            <Button Grid.Column="1" Content="Удалить" Command="{Binding DeleteZetteleNote}" Background="OrangeRed"/>
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1"></StackPanel>
+                </Grid>
+            </StackPanel>
+
             <StackPanel Name="TabSearch" 
                         Visibility="{Binding IsVisibleTabSearch, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="Поиск"/>
                 <Button Content="Обновить" Command="{Binding RefreshZettelListCommand}"/>
-                <DataGrid ItemsSource="{Binding ZettelList}" />
+                <DataGrid 
+                    ItemsSource="{Binding ZettelList}" 
+                    SelectedItem="{Binding SelectedNoteListLookUp}"
+                    IsReadOnly="True">
+                    <DataGrid.InputBindings>
+                        <MouseBinding
+            MouseAction="LeftDoubleClick"
+            Command="{Binding DoubleClickCommand}"/>
+                    </DataGrid.InputBindings>
+                </DataGrid>
             </StackPanel>
 
             <StackPanel Name="TabPlanning" 

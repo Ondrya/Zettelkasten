@@ -11,7 +11,7 @@ namespace Zettelkasten.Applications.Services
             throw new NotImplementedException();
         }
 
-        public void Delete(Note note)
+        public void Delete(int id)
         {
             throw new NotImplementedException();
         }
