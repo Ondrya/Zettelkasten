@@ -3,10 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Zettelkasten.DesktopApp" 
-        xmlns:domain="clr-namespace:Zettelkasten.Domain.Models.Painting;assembly=Zettelkasten.Domain" 
         xmlns:vm="clr-namespace:Zettelkasten.DesktopApp.ViewModels"
-        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
         mc:Ignorable="d"
         Title="Ежедневник" Height="900" Width="1200"
         d:DataContext="{d:DesignInstance Type=vm:ApplicationViewModel}">
@@ -83,12 +80,21 @@
             <StackPanel Name="TabZettelkasten" 
                         Visibility="{Binding IsVisibleTabZettelkasten, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <TextBlock Text="Zettelkasten"/>
+                <ProgressBar Visibility="{Binding IsProgressBarVisible, Converter={StaticResource BooleanToVisibilityConverter}}" IsIndeterminate="True" Height="40"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Кол-во поколений"/>
+                    <TextBox Width="50" Text="{Binding GenerationCount}"/>
+                    <Label Content="Кол-во потомков"/>
+                    <TextBox Width="50" Text="{Binding ChildCount}"/>
+                    <Label Content="Отбор каждые, поколений"/>
+                    <TextBox Width="50" Text="{Binding FilterAfter}"/>
+                </StackPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="Обновить" Command="{Binding RefreshZettelkastenCommand}"/>
+                    <Button Grid.Column="0" Content="Нарисовать" Command="{Binding RefreshZettelkastenCommand}"/>
                     <Button Grid.Column="1" Content="Следующий" Command="{Binding NextFromSelectionZettelListCommand}"/>
                 </Grid>
                 <Grid>

@@ -66,6 +66,8 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
         private void RefreshZettelkasten(object commandParameter)
         {
+            IsProgressBarVisible = true;
+
             var notes = GetNotes();
             var tagCount = _tagService.GetTagsCount(notes);
             TagCollection = tagCount.Select(x => x.Key).ToList();
@@ -90,17 +92,14 @@ namespace Zettelkasten.DesktopApp.ViewModels
             }
 
             List<PolarPointPolyColored> points = _geneticService.CreatePopulationFirst(tagCount, notes.ToList());
-            //DrawNotes(points);
 
-            var childCount = 4;
-            var generationCount = 25;
-            var filterAfter = 4;
-
-            Selection = _geneticService.Selection(points, childCount, generationCount, filterAfter);
+            Selection = _geneticService.Selection(points, ChildCount, GenerationCount, FilterAfter);
             var first = Selection[0];
             _figures = _drawingService.CreatePolygones(first);
 
             DrawNotes(_figures);
+
+            IsProgressBarVisible = false;
         }
 
         public List<Shape> CreateLinks(List<Shape> polygons)

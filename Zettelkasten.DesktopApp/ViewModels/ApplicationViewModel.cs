@@ -47,7 +47,12 @@ namespace Zettelkasten.DesktopApp.ViewModels
         public int CanvasHeight { get; set; }
 
 
+        public int GenerationCount { get; set; } = 50;
+        public int ChildCount { get; set; } = 4;
+        public int FilterAfter { get; set; } = 4;
 
+
+        public bool IsProgressBarVisible { get; set; } = false;
 
         public bool IsVisibleTabZettelkastenNew { get; set; }
 
