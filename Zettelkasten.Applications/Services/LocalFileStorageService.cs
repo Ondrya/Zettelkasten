@@ -40,6 +40,7 @@ namespace Zettelkasten.Applications.Services
             return Directory
                 .GetFiles(GetCurrentStoragePath())
                 .Select(x => Path.GetFileNameWithoutExtension(x))
+                .Where(x => x != "0")
                 .ToList();
         }
 
@@ -65,6 +66,8 @@ namespace Zettelkasten.Applications.Services
                 var path = Path.Combine(basePath, $"{item}.txt");
                 var fileContent = File.ReadAllText(path);
                 var note = JsonConvert.DeserializeObject<Note>(fileContent);
+                if (note.Tags == null)
+                    note.Tags = new List<string>();
                 notes.Add(note);
             }
 

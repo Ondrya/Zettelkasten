@@ -11,7 +11,8 @@ namespace Zettelkasten.DesktopApp.ViewModels
     public partial class 
         ApplicationViewModel : ViewModelBase
     {
-        private readonly NoteService _noteService;
+        private readonly IStorageService _storageService;
+        private readonly INoteService _noteService;
         private readonly IGeneticService _geneticService;
         private readonly TagService _tagService;
         private readonly DrawingService _drawingService;
@@ -20,7 +21,8 @@ namespace Zettelkasten.DesktopApp.ViewModels
         public ApplicationViewModel()
         {
             _showDebugMessage = false;
-            _noteService = new NoteService();
+            _storageService = new LocalFileStorageService();
+            _noteService = new NoteService(_storageService);
             _geneticService = new GeneticService(); 
             _tagService = new TagService();
             CanvasWidth = 600;

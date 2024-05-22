@@ -57,13 +57,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
         private IEnumerable<Note> GetNotes()
         {
-            var fromDb = _noteService.Get().Where(x => x != null);
-            foreach (var item in fromDb)
-            {
-                if (item.Tags == null)
-                    item.Tags = new List<string>();
-            }
-            return fromDb;
+            return _noteService.Get().Where(x => x != null);
         }
 
         private RelayCommand refreshZettelkastenCommand;
@@ -173,7 +167,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
             var _figures = _drawingService.CreatePolygones(Selection[index]);
 
-            Figures = new ObservableCollection<Shape>(_figures);
+            DrawNotes(_figures);
         }
 
         private Random rnd = new Random();
