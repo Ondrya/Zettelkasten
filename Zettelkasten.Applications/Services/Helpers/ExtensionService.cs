@@ -41,5 +41,39 @@ namespace Zettelkasten.Applications.Services
             list[indexB] = tmp;
             return list;
         }
+
+        /// <summary>
+        /// Проверка, что строка содержит одну из подстрок...
+        /// </summary>
+        /// <param name="haystack"></param>
+        /// <param name="needles"></param>
+        /// <returns></returns>
+        public static bool ContainsAny(this string haystack, params string[] needles)
+        {
+            foreach (string needle in needles)
+            {
+                if (haystack.Contains(needle))
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Проверка, что строка содержит одну из подстрок...
+        /// </summary>
+        /// <param name="haystack"></param>
+        /// <param name="needles"></param>
+        /// <returns></returns>
+        public static bool ContainsAny(this string haystack, IEnumerable<string> needles)
+        {
+            foreach (string needle in needles)
+            {
+                if (haystack.Contains(needle))
+                    return true;
+            }
+
+            return false;
+        }
     }
 }

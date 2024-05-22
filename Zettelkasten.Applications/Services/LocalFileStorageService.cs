@@ -1,14 +1,12 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Zettelkasten.Applications.Interfaces;
 using Zettelkasten.Domain.Models;
 
 namespace Zettelkasten.Applications.Services
 {
+    /// <summary>
+    /// Хранилище на основе файлов
+    /// </summary>
     public class LocalFileStorageService : IStorageService
     {
         private readonly List<string> storage;

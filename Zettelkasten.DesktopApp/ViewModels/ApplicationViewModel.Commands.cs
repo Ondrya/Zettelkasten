@@ -74,6 +74,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
         {
             var notes = GetNotes();
             var tagCount = _tagService.GetTagsCount(notes);
+            TagCollection = tagCount.Select(x => x.Key).ToList();
 
             if (_showDebugMessage)
             {
@@ -103,15 +104,19 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
             Selection = _geneticService.Selection(points, childCount, generationCount, filterAfter);
             var first = Selection[0];
+            _figures = _drawingService.CreatePolygones(first);
 
-
-            DrawNotes(first);
+            DrawNotes();
         }
 
-        private void DrawNotes(List<PolarPointPolyColored> noteCollection)
+        public void DrawNotes()
         {
-            var _figures = _drawingService.CreatePolygones(noteCollection);
             Figures = new ObservableCollection<Polygon>(_figures);
+        }
+
+        public void DrawNotes(List<Polygon> polygons)
+        {
+            Figures = new ObservableCollection<Polygon>(polygons);
         }
 
         private RelayCommand nextFromSelectionZettelListCommand;

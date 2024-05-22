@@ -91,26 +91,55 @@
                     <Button Grid.Column="0" Content="Обновить" Command="{Binding RefreshZettelkastenCommand}"/>
                     <Button Grid.Column="1" Content="Следующий" Command="{Binding NextFromSelectionZettelListCommand}"/>
                 </Grid>
-                
-                <Viewbox Stretch="None"  Margin="10">
-                    <ItemsControl 
-                        ItemsSource="{Binding Figures}" 
-                        Width="{Binding CanvasWidth}" 
-                        Height="{Binding CanvasHeight}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <Label Content="Список тегов"/>
+                        <ListBox 
+                            ItemsSource="{Binding TagCollection}"
+                            SelectionMode="Multiple"
+                            Name="TagCollection"
+                            SelectionChanged="TagCollection_SelectionChanged"
+                            />
+                        <Button 
+                            Name="SelectAllTags" 
+                            Content="Отметить все" 
+                            Click="SelectAllTags_Click"
+                            Background="YellowGreen"
+                            />
+                        <Button 
+                            Name="DeSelectAllTags" 
+                            Content="Снять выделение"
+                            Click="DeSelectAllTags_Click"
+                            Background="Yellow"
+                            />
 
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <Canvas Background="LightBlue" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.Resources>
-                            <Style TargetType="ContentPresenter">
-                                <Setter Property="Canvas.Left" Value="{Binding X}" />
-                                <Setter Property="Canvas.Top"  Value="{Binding Y}" />
-                            </Style>
-                        </ItemsControl.Resources>
-                    </ItemsControl>
-                </Viewbox>
+
+                    </StackPanel>
+                    <Viewbox Grid.Column="1" Stretch="None"  Margin="10">
+                        <ItemsControl 
+        ItemsSource="{Binding Figures}" 
+        Width="{Binding CanvasWidth}" 
+        Height="{Binding CanvasHeight}">
+
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas Background="LightBlue" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.Resources>
+                                <Style TargetType="ContentPresenter">
+                                    <Setter Property="Canvas.Left" Value="{Binding X}" />
+                                    <Setter Property="Canvas.Top"  Value="{Binding Y}" />
+                                </Style>
+                            </ItemsControl.Resources>
+                        </ItemsControl>
+                    </Viewbox>
+                </Grid>
+                
 
             </StackPanel>
 

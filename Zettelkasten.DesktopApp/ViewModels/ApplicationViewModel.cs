@@ -33,10 +33,13 @@ namespace Zettelkasten.DesktopApp.ViewModels
         
         public ObservableCollection<NoteListLookUp> ZettelList { get; set; } = new ObservableCollection<NoteListLookUp>();
 
+        public List<Polygon> _figures = new List<Polygon>();
         public ObservableCollection<Polygon> Figures { get; set; } = 
             new ObservableCollection<Polygon>();
 
         public List<List<PolarPointPolyColored>> Selection { get; set; } = new List<List<PolarPointPolyColored>>();
+
+        public List<string> TagCollection { get; set; }
 
         public int CanvasWidth { get; set; }
         public int CanvasHeight { get; set; }
