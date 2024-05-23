@@ -1,0 +1,16 @@
+﻿@startuml CommandNavigation
+actor Actor
+
+Actor -> View: Send keys
+activate View
+View -> Binding: Translate changes
+activate Binding
+Binding -> ViewModel: Change navigation properies
+activate ViewModel
+ViewModel --> Binding:  Translate changes
+deactivate ViewModel
+Binding --> View: Update view
+deactivate Binding
+View --> Actor
+deactivate View
+@enduml
