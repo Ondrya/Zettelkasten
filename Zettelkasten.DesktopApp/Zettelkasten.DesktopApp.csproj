@@ -39,10 +39,5 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
   </ItemGroup>
-  
-
-  <ItemGroup>
-    <Folder Include="Docs\ViewModels\" />
-  </ItemGroup>
 
 </Project>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Zettelkasten.DesktopApp.ViewModels.ApplicationViewModel">
+    <Position X="3.75" Y="2.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>dQ6ECqWAABSpAAUhAgBCgAAARQFD4gIDQHBlEaEAZAY=</HashCode>
+      <FileName>ViewModels\ApplicationViewModel.Commands.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Zettelkasten.DesktopApp.ViewModels.ViewModelBase">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Zettelkasten.DesktopApp.ViewModels.ZettelNoteEdit">
+    <Position X="7" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAgAAAAACgAAAQAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>ViewModels\ZettelNoteEdit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Zettelkasten.DesktopApp.ViewModels.ZettelNoteNew">
+    <Position X="9" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAgAAAAACgAAAQAAAAAAAAAAAACAABAAAA=</HashCode>
+      <FileName>ViewModels\ZettelNoteNew.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
