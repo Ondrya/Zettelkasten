@@ -1,0 +1,21 @@
+﻿@startuml EventHandler
+actor Actor
+
+Actor -> View: do Changes
+activate View
+View -> CodeBehind: catch event
+CodeBehind -> ViewModel: Get viewmodel and send there request
+activate ViewModel
+ViewModel -> Service: request
+activate Service
+Service -> Service: do work
+Service --> ViewModel: respononce
+deactivate Service
+ViewModel -> Binding:  Translate
+deactivate ViewModel
+activate Binding
+Binding --> View: Translaet
+deactivate Binding
+View --> Actor
+deactivate View
+@enduml

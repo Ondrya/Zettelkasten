@@ -1,0 +1,21 @@
+﻿@startuml Command
+actor Actor
+
+Actor -> View: Send keys
+activate View
+View -> Binding: Translate
+activate Binding
+Binding -> ViewModel: Translate
+activate ViewModel
+ViewModel -> Service: request
+activate Service
+Service -> Service: do work
+Service --> ViewModel: respononce
+deactivate Service
+ViewModel --> Binding:  Translate
+deactivate ViewModel
+Binding --> View: Translaet
+deactivate Binding
+View --> Actor
+deactivate View
+@enduml
