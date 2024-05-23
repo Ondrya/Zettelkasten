@@ -4,7 +4,7 @@ using Zettelkasten.Domain.Models;
 namespace Zettelkasten.Applications.Services
 {
     /// <summary>
-    /// Сервис ля работы с метками
+    /// Сервис для работы с метками
     /// </summary>
     public class TagService : ITagService
     {

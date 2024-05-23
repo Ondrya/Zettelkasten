@@ -1,6 +1,6 @@
 ﻿using Zettelkasten.Domain.Models;
 
-namespace Zettelkasten.Applications.Services
+namespace Zettelkasten.Applications.Interfaces
 {
     public interface INoteService
     {

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="Zettelkasten.Applications.Interfaces.IGeneticService">
+    <Position X="0.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCAAAAAAAAABAAAAAAAABAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Interfaces\IGeneticService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Zettelkasten.Applications.Interfaces.IStorageService">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAABAAAAAAAAAAAEAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IStorageService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Zettelkasten.Applications.Interfaces.ITagService">
+    <Position X="4.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ITagService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Zettelkasten.Applications.Interfaces.INoteService">
+    <Position X="2.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAABAAAAAAAAAAAEAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\INoteService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
