@@ -147,7 +147,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
             List<PolarPointPolyColored> points = _geneticService.CreatePopulationFirst(tagCount, notes.ToList());
 
-                        Selection = _geneticService.Selection(points, ChildCount, GenerationCount, FilterAfter);
+            Selection = _geneticService.Selection(points, ChildCount, GenerationCount, FilterAfter);
             var first = Selection[0];
             _figures = _drawingService.CreatePolygones(first);
 
@@ -164,7 +164,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
             {
                 var tags = GetShapeTags(item);
                 var theSameTags = polygons
-                    .Where(x => 
+                    .Where(x =>
                         GetShapeTags(x).Intersect(tags).Any())
                     .ToList();
                 foreach (var item1 in theSameTags)

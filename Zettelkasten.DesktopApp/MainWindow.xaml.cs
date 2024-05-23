@@ -19,7 +19,7 @@ namespace Zettelkasten.DesktopApp
         private void TagCollection_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             ApplicationViewModel? vm = GetVM();
-            vm.ClearDrawNotes();
+            vm.ClearDrawNotes();    
 
             var selectedItems = TagCollection.SelectedItems.Cast<string>();
             var selectedTagName = selectedItems;

@@ -1,52 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Zettelkasten.Domain.Models.Note">
-    <Position X="1.25" Y="1.5" Width="1.5" />
+    <Position X="2.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgAAAAEAAAAAAAAABAAAAEAAAAIQAAgAAAA=</HashCode>
       <FileName>Models\Note.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Zettelkasten.Domain.Models.NoteListLookUp">
-    <Position X="5.5" Y="2.75" Width="1.5" />
+    <Position X="6" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAIAAAAAAAA=</HashCode>
       <FileName>Models\NoteListLookUp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Zettelkasten.Domain.Models.NoteLookUp">
-    <Position X="5.5" Y="1.25" Width="1.5" />
+    <Position X="7.75" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>Models\NoteLookUp.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Zettelkasten.Domain.Models.Tag">
-    <Position X="3.25" Y="0.5" Width="1.5" />
+    <Position X="4.25" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\Tag.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Zettelkasten.Domain.Models.ModelBase">
-    <Position X="3.25" Y="2" Width="1.5" />
+    <Position X="6.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAgAAAAACAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\ModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Zettelkasten.Domain.Models.AttachmentNote">
-    <Position X="7.75" Y="0.5" Width="1.5" />
+    <Position X="9.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\AttachmentNote.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Zettelkasten.Domain.Models.Painting.PolarPoint">
-    <Position X="7.5" Y="3" Width="1.5" />
+  <Class Name="Zettelkasten.Domain.Models.NoteConnection">
+    <Position X="11.25" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAEAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
-      <FileName>Models\Painting\PolarPoint.cs</FileName>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Models\NoteConnection.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
