@@ -200,7 +200,15 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
         private static List<string> GetShapeTags(Shape item)
         {
-            return (item.ToolTip as string).Split("---")[0].Split(";").ToList();
+            // #tag;
+            var tagString = (item.ToolTip as string).Split("---")[0];
+            var tags = tagString
+                .Split("#")
+                .Select(x => x.Split(";")[0])
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .ToList();
+
+            return tags;
         }
 
         public void DrawNotes(List<Shape> polygons)

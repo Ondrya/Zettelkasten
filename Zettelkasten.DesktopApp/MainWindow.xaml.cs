@@ -22,7 +22,7 @@ namespace Zettelkasten.DesktopApp
             vm.ClearDrawNotes();    
 
             var selectedItems = TagCollection.SelectedItems.Cast<string>();
-            var selectedTagName = selectedItems;
+            var selectedTagName = selectedItems.Select(x => $"#{x};");
             
             var filteredFigures = vm._figures.Where(x => ((string)x.ToolTip).ContainsAny(selectedTagName)).ToList();
             vm.DrawNotes(filteredFigures);
