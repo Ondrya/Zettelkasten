@@ -184,18 +184,31 @@
                             Click="DeSelectAllTags_Click"
                             Background="Yellow"
                             />
-
-
                     </StackPanel>
-                    <Viewbox Grid.Column="1" Stretch="None"  Margin="10">
+
+                    <StackPanel
+                        Grid.Column="1" 
+                        Width="{Binding CanvasWidth}" 
+                        Height="{Binding CanvasHeight}">
+                        <TextBlock Text="Для масштабирования используй колёсико мышь"/>
+                        
+                        <Viewbox 
+                            Stretch="None"  
+                            Margin="10"
+                            Width="{Binding CanvasWidth}" 
+                            Height="{Binding CanvasHeight}">
                         <ItemsControl 
-        ItemsSource="{Binding Figures}" 
-        Width="{Binding CanvasWidth}" 
-        Height="{Binding CanvasHeight}">
+                            ItemsSource="{Binding Figures}" 
+                            Width="{Binding CanvasWidth}" 
+                            Height="{Binding CanvasHeight}">
 
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <Canvas Background="LightBlue" />
+                                    <Canvas Background="LightBlue" MouseWheel="Canvas_MouseWheel">
+                                        <Canvas.RenderTransform>
+                                            <MatrixTransform/>
+                                        </Canvas.RenderTransform>
+                                    </Canvas>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.Resources>
@@ -206,6 +219,8 @@
                             </ItemsControl.Resources>
                         </ItemsControl>
                     </Viewbox>
+                        
+                    </StackPanel>
                 </Grid>
 
 

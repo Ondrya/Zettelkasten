@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Windows.Media;
+using System.Xml.Linq;
 using Zettelkasten.Applications.Services;
 using Zettelkasten.DesktopApp.ViewModels;
 
@@ -42,6 +44,44 @@ namespace Zettelkasten.DesktopApp
         private void DeSelectAllTags_Click(object sender, RoutedEventArgs e)
         {
             TagCollection.SelectedItems.Clear();
+        }
+
+
+        // Zoom
+        private Double zoomMax = 5;
+        private Double zoomMin = 1;
+        private Double zoomSpeed = 0.001;
+        private Double zoom = 1;
+
+
+        private void Canvas_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        {
+            //var element = (UIElement)sender;
+            //Point position = e.GetPosition(element);
+            //MatrixTransform transform = (MatrixTransform)element.RenderTransform;
+            //Matrix matrix = transform.Matrix;
+            //double scale = e.Delta >= 0 ? 1.1 : (1.0 / 1.1); // choose appropriate scaling factor
+
+            //matrix.ScaleAtPrepend(scale, scale, position.X, position.Y);
+
+            //element.RenderTransform = transform;
+
+
+            var element = (UIElement)sender;
+
+            zoom += zoomSpeed * e.Delta; // Ajust zooming speed (e.Delta = Mouse spin value )
+            if (zoom < zoomMin)
+                zoom = zoomMin; // Limit Min Scale
+            if (zoom > zoomMax)
+                zoom = zoomMax; // Limit Max Scale
+
+
+            Point mousePos = e.GetPosition(element);
+            
+            if (zoom > 1)
+                element.RenderTransform = new ScaleTransform(zoom, zoom, mousePos.X, mousePos.Y); // transform Canvas size from mouse position
+            else
+                element.RenderTransform = new ScaleTransform(zoom, zoom); // transform Canvas size
         }
     }
 }
