@@ -1,6 +1,4 @@
-﻿//using System.Drawing;
-
-
+﻿using Newtonsoft.Json;
 using System.Drawing;
 
 namespace Zettelkasten.Domain.Models.Painting
@@ -58,6 +56,7 @@ namespace Zettelkasten.Domain.Models.Painting
     {
         public List<Color> Colors { get; set; }
 
+        [JsonIgnore]
         public Color FirstColors { get
             {
                 return Colors.First();
