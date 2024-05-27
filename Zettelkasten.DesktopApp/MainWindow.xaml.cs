@@ -56,17 +56,6 @@ namespace Zettelkasten.DesktopApp
 
         private void Canvas_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
-            //var element = (UIElement)sender;
-            //Point position = e.GetPosition(element);
-            //MatrixTransform transform = (MatrixTransform)element.RenderTransform;
-            //Matrix matrix = transform.Matrix;
-            //double scale = e.Delta >= 0 ? 1.1 : (1.0 / 1.1); // choose appropriate scaling factor
-
-            //matrix.ScaleAtPrepend(scale, scale, position.X, position.Y);
-
-            //element.RenderTransform = transform;
-
-
             var element = (UIElement)sender;
 
             zoom += zoomSpeed * e.Delta; // Ajust zooming speed (e.Delta = Mouse spin value )
