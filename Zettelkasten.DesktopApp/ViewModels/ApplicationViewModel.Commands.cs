@@ -122,6 +122,19 @@ namespace Zettelkasten.DesktopApp.ViewModels
         {
             IsProgressBarVisible = true;
 
+            var points = CreateFirstPopulation();
+
+            Selection = _geneticService.Selection(points, ChildCount, GenerationCount, FilterAfter);
+            var first = Selection[0];
+            _figures = _drawingService.CreatePolygones(first);
+
+            DrawNotes(_figures);
+
+            IsProgressBarVisible = false;
+        }
+
+        private List<PolarPointPolyColored> CreateFirstPopulation()
+        {
             var notes = GetNotes();
             var tagCount = _tagService.GetTagsCount(notes);
             TagCollection = tagCount.Select(x => x.Key).ToList();
@@ -146,14 +159,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
             }
 
             List<PolarPointPolyColored> points = _geneticService.CreatePopulationFirst(tagCount, notes.ToList());
-
-            Selection = _geneticService.Selection(points, ChildCount, GenerationCount, FilterAfter);
-            var first = Selection[0];
-            _figures = _drawingService.CreatePolygones(first);
-
-            DrawNotes(_figures);
-
-            IsProgressBarVisible = false;
+            return points;
         }
 
         public List<Shape> CreateLinks(List<Shape> polygons)
@@ -222,6 +228,32 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
             DrawNotes(_figures);
         }
+
+
+        private RelayCommand generateNextPopulationCommand;
+        public ICommand GenerateNextPopulationCommand => generateNextPopulationCommand ??= new RelayCommand(GenerateNextPopulation);
+
+        private void GenerateNextPopulation(object commandParameter)
+        {
+            List<PolarPointPolyColored> points;
+
+            if (Selection == null || Selection.Count == 0)
+            {
+                points = CreateFirstPopulation();
+            }
+            else
+            {
+                points = Selection[0];
+            }
+
+            Selection = _geneticService.Selection(points, ChildCount, 1, 1);
+            var first = Selection[0];
+
+            var _figures = _drawingService.CreatePolygones(first);
+
+            DrawNotes(_figures);
+        }
+
 
         private Random rnd = new Random();
 

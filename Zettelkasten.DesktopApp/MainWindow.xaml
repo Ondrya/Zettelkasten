@@ -146,9 +146,18 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="Нарисовать" Command="{Binding RefreshZettelkastenCommand}"/>
-                    <Button Grid.Column="1" Content="Следующий" Command="{Binding NextFromSelectionZettelListCommand}"/>
+                    <Button Grid.Column="0" Content="Нарисовать" 
+                            Margin="3"
+                            Command="{Binding RefreshZettelkastenCommand}"/>
+                    <Button Grid.Column="1" Content="Следующий из отбора" 
+                            Margin="3"
+                            Command="{Binding NextFromSelectionZettelListCommand}"/>
+                    <Button Grid.Column="2" Content="Следующий из отбора" 
+                            Margin="3"
+                            Command="{Binding GenerateNextPopulationCommand}"
+                            Background="OrangeRed"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -198,7 +207,7 @@
                         </ItemsControl>
                     </Viewbox>
                 </Grid>
-                
+
 
             </StackPanel>
 
