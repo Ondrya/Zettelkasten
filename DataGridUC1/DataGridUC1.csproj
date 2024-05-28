@@ -1,0 +1,95 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <FileVersion>1.4.0.0</FileVersion>
+    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+    <Version>1.4.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\BindableRichTextBox.cs" />
+    <Compile Remove="Models\emDataGridOptions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Images\bold.png" />
+    <None Remove="Images\bullets.png" />
+    <None Remove="Images\center2.png" />
+    <None Remove="Images\charactergrowfont.png" />
+    <None Remove="Images\charactershrinkfont.png" />
+    <None Remove="Images\close.png" />
+    <None Remove="Images\config.png" />
+    <None Remove="Images\copy16.png" />
+    <None Remove="Images\cut16.png" />
+    <None Remove="Images\Indent.png" />
+    <None Remove="Images\IndentDo.png" />
+    <None Remove="Images\IndentUndo.png" />
+    <None Remove="Images\italic.png" />
+    <None Remove="Images\LeftAlign.png" />
+    <None Remove="Images\newdocument32.png" />
+    <None Remove="Images\Numbered.png" />
+    <None Remove="Images\open16.png" />
+    <None Remove="Images\paste16.png" />
+    <None Remove="Images\Redo.png" />
+    <None Remove="Images\RightAlign.png" />
+    <None Remove="Images\save16.png" />
+    <None Remove="Images\underline16.png" />
+    <None Remove="Images\undo16.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\bold.png" />
+    <Resource Include="Images\bullets.png" />
+    <Resource Include="Images\center2.png" />
+    <Resource Include="Images\charactergrowfont.png" />
+    <Resource Include="Images\charactershrinkfont.png" />
+    <Resource Include="Images\close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\config.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\copy16.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\cut16.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Indent.png" />
+    <Resource Include="Images\IndentDo.png" />
+    <Resource Include="Images\IndentUndo.png" />
+    <Resource Include="Images\italic.png" />
+    <Resource Include="Images\LeftAlign.png" />
+    <Resource Include="Images\newdocument32.png" />
+    <Resource Include="Images\Numbered.png" />
+    <Resource Include="Images\open16.png" />
+    <Resource Include="Images\paste16.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Redo.png" />
+    <Resource Include="Images\RightAlign.png" />
+    <Resource Include="Images\save16.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\underline16.png" />
+    <Resource Include="Images\undo16.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="MyCredits.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

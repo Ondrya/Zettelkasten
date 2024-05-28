@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using DataGridUC1;
+using System.Windows.Input;
 using Zettelkasten.DesktopApp.ViewModels;
 
 namespace Zettelkasten.DesktopApp.ViewModels
@@ -31,7 +32,9 @@ namespace Zettelkasten.DesktopApp.ViewModels
         }
         private void TabPlanning(object obj)
         {
-            ShowTab(MenuItems.Planning);
+            //ShowTab(MenuItems.Planning);
+            var window = new Planning();
+            window.Show();
         }
         private void TabZettelkasten(object obj)
         {
@@ -56,7 +59,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
         }
 
         public ICommand TabSearchCommand => tabSearchCommand ??= new RelayCommand(TabSearch, (obj) => true);
-        public ICommand TabPlanningCommand => tabPlanningCommand ??= new RelayCommand(TabPlanning, (obj) => false);
+        public ICommand TabPlanningCommand => tabPlanningCommand ??= new RelayCommand(TabPlanning, (obj) => true);
         public ICommand TabZettelkastenCommand => tabZettelkastenCommand ??= new RelayCommand(TabZettelkasten, (obj) => true);
         public ICommand TabSelectionMapCommand => tabSelectionMapCommand ??= new RelayCommand(TabSelectionMap, (obj) => false);
         public ICommand TabNotepadCommand => tabNotepadCommand ??= new RelayCommand(TabNotepad, (obj) => false);

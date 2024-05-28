@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DataGridUC1\DataGridUC1.csproj" />
     <ProjectReference Include="..\Zettelkasten.Applications\Zettelkasten.Applications.csproj" />
   </ItemGroup>
 

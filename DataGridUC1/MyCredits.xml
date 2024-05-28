@@ -1,0 +1,59 @@
+<?xml version="1.0" standalone="yes"?>
+<MainDataSet xmlns="http://tempuri.org/MainDataSet.xsd">
+  <Credits>
+    <Item>MVVM</Item>
+    <Note>Microsoft MVVM Toolkit</Note>
+    <Link>https://docs.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction</Link>
+    <Check>true</Check>
+    <Rating>Good</Rating>
+    <ID>-1</ID>
+  </Credits>
+  <Credits>
+    <Item>ComboBox Binding</Item>
+    <Note>Binding ItemsSource of a ComboBoxColumn in WPF DataGrid</Note>
+    <Link>https://stackoverflow.com/questions/5409259/binding-itemssource-of-a-comboboxcolumn-in-wpf-datagrid</Link>
+    <Check>true</Check>
+    <Rating>Good</Rating>
+    <ID>-2</ID>
+  </Credits>
+  <Credits>
+    <Item>MVVM</Item>
+    <Note>ICommand with MVVM pattern; CPOL</Note>
+    <Link>https://www.codeproject.com/Articles/863671/Using-ICommand-with-MVVM-pattern</Link>
+    <Check>false</Check>
+    <Rating>Excellent</Rating>
+    <ID>-3</ID>
+  </Credits>
+  <Credits>
+    <Item>DataGrid</Item>
+    <Note>#HyperlinkExtensions#</Note>
+    <Link>https://stackoverflow.com/questions/10238694/example-using-hyperlink-in-wpf</Link>
+    <Check>true</Check>
+    <Rating>Good</Rating>
+    <ID>-4</ID>
+  </Credits>
+  <Credits>
+    <Item>DataGrid</Item>
+    <Note>Example using Hyperlink in WPF</Note>
+    <Link>https://stackoverflow.com/questions/10238694/example-using-hyperlink-in-wpf</Link>
+    <Check>false</Check>
+    <Rating>Good</Rating>
+    <ID>-5</ID>
+  </Credits>
+  <Credits>
+    <Item>DataGrid</Item>
+    <Note>How to: Group, sort, and filter data in the DataGrid control</Note>
+    <Link>https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/how-to-group-sort-and-filter-data-in-the-datagrid-control?view=netframeworkdesktop-4.8</Link>
+    <Check>false</Check>
+    <Rating>Excellent</Rating>
+    <ID>-6</ID>
+  </Credits>
+  <Credits>
+    <Item>DataGrid</Item>
+    <Note>FlexGrid is a custom WPF DataGrid with convenient and useful features.</Note>
+    <Link>https://github.com/soomin-kevin-sung/dotnet-flexgrid/blob/master/src/KevinComponent/FlexGrid.cs</Link>
+    <Check>false</Check>
+    <Rating>Excellent</Rating>
+    <ID>-7</ID>
+  </Credits>
+</MainDataSet>

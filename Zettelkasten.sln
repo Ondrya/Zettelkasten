@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zettelkasten.Applications",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zettelkasten.DesktopApp", "Zettelkasten.DesktopApp\Zettelkasten.DesktopApp.csproj", "{6686918E-9DF8-4056-9BBB-FFA10CF6F24A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zettelkasten.ApplicationsTests", "Zettelkasten.ApplicationsTests\Zettelkasten.ApplicationsTests.csproj", "{A06F55F2-02B2-4892-B043-1E06757DBFE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zettelkasten.ApplicationsTests", "Zettelkasten.ApplicationsTests\Zettelkasten.ApplicationsTests.csproj", "{A06F55F2-02B2-4892-B043-1E06757DBFE2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGridUC1", "DataGridUC1\DataGridUC1.csproj", "{C7BAD68A-C2CE-4841-812C-352B60099003}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{A06F55F2-02B2-4892-B043-1E06757DBFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A06F55F2-02B2-4892-B043-1E06757DBFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A06F55F2-02B2-4892-B043-1E06757DBFE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7BAD68A-C2CE-4841-812C-352B60099003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7BAD68A-C2CE-4841-812C-352B60099003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7BAD68A-C2CE-4841-812C-352B60099003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7BAD68A-C2CE-4841-812C-352B60099003}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
