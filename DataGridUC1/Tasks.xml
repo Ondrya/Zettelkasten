@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="yes"?>
+<MainDataSet xmlns="http://tempuri.org/MainDataSet.xsd">
+  <Tasks>
+    <Group>MVVM</Group>
+    <Note>Element</Note>
+    <Status>Не назначен</Status>
+    <Date>2024-05-09</Date>
+    <Link>https://docs.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction</Link>
+    <File>https://docs.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction</File>
+    <ID>-1</ID>
+  </Tasks>
+  <Tasks>
+    <Group>MVVM</Group>
+    <Note>Element 2</Note>
+    <Status>В работе</Status>
+    <Date>2024-05-09</Date>
+    <Link>https://docs.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction</Link>
+    <File>https://docs.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction</File>
+    <ID>-2</ID>
+  </Tasks>
+  <Tasks>
+    <Group>VIEW</Group>
+    <Note>Element 3</Note>
+    <Status>Блок</Status>
+    <Date>2024-05-08</Date>
+    <Link>https://docs.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction</Link>
+    <File>https://docs.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction</File>
+    <ID>-3</ID>
+  </Tasks>
+  <Tasks>
+    <Group>MODEL</Group>
+    <Note>Element 4</Note>
+    <Status>Готово</Status>
+    <Date>2024-05-07</Date>
+    <Link>https://docs.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction</Link>
+    <File>https://docs.microsoft.com/en-us/windows/communitytoolkit/mvvm/introduction</File>
+    <ID>-4</ID>
+  </Tasks>
+</MainDataSet>

@@ -24,10 +24,27 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="Tasks" msprop:Generator_RowEvHandlerName="TasksRowChangeEventHandler" msprop:Generator_RowDeletedName="TasksRowDeleted" msprop:Generator_RowDeletingName="TasksRowDeleting" msprop:Generator_RowEvArgName="TasksRowChangeEvent" msprop:Generator_TablePropName="Tasks" msprop:Generator_RowChangedName="TasksRowChanged" msprop:Generator_RowChangingName="TasksRowChanging" msprop:Generator_TableClassName="TasksDataTable" msprop:Generator_RowClassName="TasksRow" msprop:Generator_TableVarName="tableTasks" msprop:Generator_UserTableName="Tasks">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Group" msprop:Generator_ColumnPropNameInRow="Group" msprop:Generator_ColumnPropNameInTable="GroupColumn" msprop:Generator_ColumnVarNameInTable="columnGroup" msprop:Generator_UserColumnName="Group" type="xs:string" />
+              <xs:element name="Note" msprop:Generator_ColumnPropNameInRow="Note" msprop:Generator_ColumnPropNameInTable="NoteColumn" msprop:Generator_ColumnVarNameInTable="columnNote" msprop:Generator_UserColumnName="Note" type="xs:string" minOccurs="0" />
+              <xs:element name="Status" msprop:Generator_ColumnPropNameInRow="Status" msprop:Generator_ColumnPropNameInTable="StatusColumn" msprop:Generator_ColumnVarNameInTable="columnStatus" msprop:Generator_UserColumnName="Status" type="xs:string" minOccurs="0" />
+              <xs:element name="Date" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_UserColumnName="Date" type="xs:string" minOccurs="0" />
+              <xs:element name="Link" msprop:Generator_ColumnPropNameInRow="Link" msprop:Generator_ColumnPropNameInTable="LinkColumn" msprop:Generator_ColumnVarNameInTable="columnLink" msprop:Generator_UserColumnName="Link" type="xs:string" minOccurs="0" />
+              <xs:element name="File" msprop:Generator_ColumnPropNameInRow="File" msprop:Generator_ColumnPropNameInTable="FileColumn" msprop:Generator_ColumnVarNameInTable="columnFile" msprop:Generator_UserColumnName="File" type="xs:string" minOccurs="0" />
+              <xs:element name="ID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_UserColumnName="ID" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="CreditsKey1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Credits" />
+      <xs:field xpath="mstns:ID" />
+    </xs:unique>
+    <xs:unique name="TasksKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Tasks" />
       <xs:field xpath="mstns:ID" />
     </xs:unique>
   </xs:element>

@@ -87,6 +87,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Tasks.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="MyCredits.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
