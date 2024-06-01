@@ -175,21 +175,24 @@ namespace Zettelkasten.DesktopApp.ViewModels
                     .ToList();
                 foreach (var item1 in theSameTags)
                 {
-                    var itemLink = new Line();
-
                     // Create a red Brush  
-                    SolidColorBrush redBrush = new SolidColorBrush();
-                    redBrush.Color = Colors.Red;
+                    SolidColorBrush redBrush = new()
+                    {
+                        Color = Colors.Red
+                    };
 
-                    // Set Line's width and color  
-                    itemLink.StrokeThickness = 1;
-                    itemLink.Stroke = redBrush;
+                    var itemLink = new Line
+                    {
+                        // Set Line's width and color  
+                        StrokeThickness = 1,
+                        Stroke = redBrush
+                    };
 
                     var centered = 10;
-                    itemLink.X1 = (item as Polygon).Points[0].X + centered;
-                    itemLink.Y1 = (item as Polygon).Points[0].Y + centered;
-                    itemLink.X2 = (item1 as Polygon).Points[0].X + centered;
-                    itemLink.Y2 = (item1 as Polygon).Points[0].Y + centered;
+                    itemLink.X1 = ((Polygon)item).Points[0].X + centered;
+                    itemLink.Y1 = ((Polygon)item).Points[0].Y + centered;
+                    itemLink.X2 = ((Polygon)item1).Points[0].X + centered;
+                    itemLink.Y2 = ((Polygon)item1).Points[0].Y + centered;
 
                     shapeLinks.Add(itemLink);
                 }
@@ -200,8 +203,7 @@ namespace Zettelkasten.DesktopApp.ViewModels
 
         private static List<string> GetShapeTags(Shape item)
         {
-            // #tag;
-            var tagString = (item.ToolTip as string).Split("---")[0];
+            var tagString = ((string)item.ToolTip).Split("---")[0];
             var tags = tagString
                 .Split("#")
                 .Select(x => x.Split(";")[0])

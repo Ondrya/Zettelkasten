@@ -182,7 +182,10 @@ namespace Zettelkasten.Applications.Services
     ""CreatedAt"": ""2024-05-14T08:42:57.4532585+03:00""
   }}
 ]";
-            return JsonConvert.DeserializeObject<List<Note>>(json);
+            var res = JsonConvert.DeserializeObject<List<Note>>(json);
+            if (res == null)
+                throw new InvalidOperationException("Коллекция записей/заметок пуста");
+            return res;
         }
 
         public Note Get(int id)

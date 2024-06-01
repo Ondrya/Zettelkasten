@@ -30,9 +30,12 @@ namespace Zettelkasten.DesktopApp
             vm.DrawNotes(filteredFigures);
         }
 
-        private ApplicationViewModel? GetVM()
+        private ApplicationViewModel GetVM()
         {
-            return (this.DataContext as ApplicationViewModel);
+            var vm = (this.DataContext as ApplicationViewModel);
+            if (vm == null)
+                throw new InvalidOperationException("Главная ViewModel не проинициирована");
+            return vm;
         }
 
         private void SelectAllTags_Click(object sender, RoutedEventArgs e)

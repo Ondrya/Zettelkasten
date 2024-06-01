@@ -10,19 +10,25 @@ namespace Zettelkasten.Applications.Services
         /// <summary>
         /// Копирование сложных типов без ссылок
         /// </summary>
-        public static T DeepCopy<T>(T item)
+        public static T DeepCopy<T>(T item) where T : class
         {
             var json = JsonConvert.SerializeObject(item);
-            return JsonConvert.DeserializeObject<T>(json);
+            var res = JsonConvert.DeserializeObject<T>(json);
+            if (res == null)
+                throw new InvalidOperationException();
+            return res;
         }
 
         /// <summary>
         /// Копирование коллекции сложных типов без ссылок
         /// </summary>
-        public static IList<T> DeepCopyList<T>(this IList<T> list)
+        public static IList<T> DeepCopyList<T>(this IList<T> list) where T : class
         {
             var json = JsonConvert.SerializeObject(list);
-            return JsonConvert.DeserializeObject<IList<T>>(json);
+            var res = JsonConvert.DeserializeObject<IList<T>>(json);
+            if (res == null)
+                throw new InvalidOperationException();
+            return res;
         }
 
 
